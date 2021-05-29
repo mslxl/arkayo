@@ -1,0 +1,13 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "dev",
+			"group": "test",
+			"problemMatcher": [],
+			"label": "npm: dev",
+			"detail": "cross-env NODE_ENV=development webpack"
+		}
+	]
+}

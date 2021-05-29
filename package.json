@@ -1,0 +1,36 @@
+{
+  "name": "arkayo",
+  "packageName": "com.tagigxo.arkayo",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack",
+    "watch": "cross-env NODE_ENV=development webpack watch",
+    "build": "cross-env NODE_ENV=production webpack",
+    "analyzer": "webpack-bundle-analyzer --port 8123 dist/stats.json"
+  },
+  "author": "Tagigxo",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "@auto.pro/webpack-loader": "^8.12.5",
+    "@auto.pro/webpack-plugin": "^8.13.1",
+    "@babel/core": "^7.14.3",
+    "@babel/plugin-transform-modules-commonjs": "^7.14.0",
+    "@babel/plugin-transform-runtime": "^7.14.3",
+    "@babel/preset-env": "^7.14.2",
+    "@babel/runtime": "^7.14.0",
+    "babel-loader": "^8.2.2",
+    "copy-webpack-plugin": "^8.1.1",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.26.0",
+    "javascript-obfuscator": "^2.13.0",
+    "raw-loader": "^4.0.2",
+    "ts-loader": "^9.1.2",
+    "typescript": "^4.2.4",
+    "webpack": "^5.37.0",
+    "webpack-bundle-analyzer": "^4.4.2",
+    "webpack-cli": "^4.7.0",
+    "webpack-obfuscator": "^3.3.1"
+  },
+  "dependencies": {}
+}
