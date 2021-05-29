@@ -1,0 +1,42 @@
+<vertical>
+  <appbar>
+    <toolbar id="toolbar" title="Arkayo" />
+  </appbar>
+  <viewpager id="pager" layout_weight="1">
+    <frame>
+      <vertical padding="16">
+        <horizontal>
+          <text text="Package name:" />
+          <input layout_weight="1" id="inputPkgname" text="" />
+        </horizontal>
+        <horizontal>
+          <text>Task:</text>
+          <spinner layout_weight="1" id="spTask" entries="[[task]]" />
+        </horizontal>
+        <card>
+          <vertical>
+            <text text="Click Mode:" />
+            <radiogroup>
+              <radio text="Accessibility (Recommend)" checked="true" />
+              <radio text="Root" />
+              <radio text="Shell" />
+            </radiogroup>
+          </vertical>
+        </card>
+        <card>
+          <vertical>
+            <text text="Other Config:" />
+            <checkbox id="cbConsole" text="Show console dialog" />
+            <checkbox id="cb_kill" text="Kill game process after task is finished" />
+            <checkbox text="Shutdown after task is finished (Root needed)" />
+          </vertical>
+        </card>
+        <button id="btnLaunch" text="Launch" />
+      </vertical>
+    </frame>
+    <frame>
+      <console id="console" w="*" h="*"></console>
+    </frame>
+  </viewpager>
+  <bottomnaviagtion id="nav" bg="#ffffff" />
+</vertical>
