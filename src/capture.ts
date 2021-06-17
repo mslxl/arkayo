@@ -37,7 +37,7 @@ export function refresh(cvt: boolean = false) {
 
   //   }
   // }
-  hideConsole()
+  hideConsole(true)
   if (cvt) {
     let screenShot = captureScreen()
     let gray = images.grayscale(screenShot)
