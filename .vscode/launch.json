@@ -11,14 +11,12 @@
       "type": "node-terminal"
     },
     {
-      
       "type": "autojs",
       "request": "launch",
-      "stopOnEntry": true,
+      "stopOnEntry": false,
       "device": "[recent]",
       "name": "Auto.js Pro Debug",
-      "main": "${workspaceFolder}/dist/arkayo.js",
-      "preLaunchTask": "npm: dev"
+      "main": "./dist/arkayo.js"
     }
   ]
 }

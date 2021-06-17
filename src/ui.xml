@@ -6,8 +6,8 @@
     <frame>
       <vertical padding="16">
         <horizontal>
-          <text text="Package name:" />
-          <input layout_weight="1" id="inputPkgname" text="" />
+          <text text="Server:" />
+          <spinner layout_weight="1" id="spGame" entries="[[game]]" />
         </horizontal>
         <horizontal>
           <text>Task:</text>
@@ -17,9 +17,9 @@
           <vertical>
             <text text="Click Mode:" />
             <radiogroup>
-              <radio text="Accessibility (Recommend)" checked="true" />
-              <radio text="Root" />
-              <radio text="Shell" />
+              <radio id="raAcc" text="Accessibility (Recommend)" checked="true" />
+              <radio id="raRoot" text="Root" />
+              <radio id="raShell" text="Shell" />
             </radiogroup>
           </vertical>
         </card>

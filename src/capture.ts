@@ -1,6 +1,7 @@
+import { hideConsole, showConsole } from './logger'
 let isPermit = false
 let isAutoCapture = false
-let img:Image
+let img: any
 
 export function requestPermission() {
   if (!isPermit) {
@@ -12,12 +13,12 @@ export function requestPermission() {
   }
 }
 
-export function setAutoCapture(enable:boolean) {
+export function setAutoCapture(enable: boolean) {
   isAutoCapture = enable
 }
 
 export function shot() {
-  if (img == null || isAutoCapture) {
+  if (img === null || isAutoCapture || img.isRecycled()) {
     refresh(false)
   }
   return img
@@ -26,10 +27,17 @@ export function shot() {
  * 
  * @param {bool} cvt Convert img into gray
  */
- export function refresh(cvt:boolean) {
-  if (img != null) {
-    img.recycle()
-  }
+export function refresh(cvt: boolean = false) {
+  // If screen not changed, the same img will be returned.
+  // So do not recycle it.
+  // if (img != null) {
+  //   try {
+  //     img.recycle()
+  //   } catch (e) {
+
+  //   }
+  // }
+  hideConsole()
   if (cvt) {
     let screenShot = captureScreen()
     let gray = images.grayscale(screenShot)
@@ -40,4 +48,5 @@ export function shot() {
   } else {
     img = captureScreen()
   }
+  showConsole()
 }

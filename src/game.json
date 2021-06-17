@@ -1,0 +1,26 @@
+[
+  {
+    "name": "明日方舟 官服",
+    "pkg": "com.hypergryph.arknights"
+  },
+  {
+    "name": "明日方舟 bilibili",
+    "pkg": "com.hypergryph.arknights.bilibili"
+  },
+  {
+    "name": "明日方舟 龍成網路 (Compatibility unknown )",
+    "pkg": "tw.txwy.and.arknights"
+  },
+  {
+    "name": "アークナイツ  (Compatibility unknown )",
+    "pkg": "com.YoStarJP.Arknights"
+  },
+  {
+    "name": "Arknights  (Compatibility unknown )",
+    "pkg": "com.YoStarEN.Arknights"
+  },
+  {
+    "name": "명일방주  (Compatibility unknown )",
+    "pkg": "com.YoStarKR.Arknights"
+  }
+]

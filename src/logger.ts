@@ -15,15 +15,18 @@ export function showConsole() {
   }
 }
 
-export function hideConsole() {
+export function hideConsole(wait:boolean = false) {
   console.hide()
+  if(wait){
+    sleep(200)
+  }
 }
 
 export function log(str:any) {
   console.log(str)
 }
 
-export function info(str:any){
+export function i(str:any){
   console.info(str)
 }
 

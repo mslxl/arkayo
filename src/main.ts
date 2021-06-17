@@ -1,8 +1,15 @@
-import UI_XML from 'raw-loader!./ui.xml'
+import XML_UI from 'raw-loader!./ui.xml'
+import JSON_GAME from './game.json'
 import * as logger from './logger'
 import * as capture from './capture'
+import * as conf from './config'
 let androidx = Packages.androidx;
 
+import taskList from './task/task-list'
+const data = {
+  games: JSON_GAME,
+  task: taskList
+}
 
 function renderUI(u: any, uiXml: string, data: any) {
   let rg = /\[\[(.*)\]\]/gm
@@ -51,18 +58,49 @@ function initConsole(u: any) {
     }
   }));
 }
-
-function initUI(u: any) {
-  renderUI(u, UI_XML, {
-    task: ['ww', 'aa']
+function saveConfig(u: any) {
+  conf.set('game', u.spGame.getSelectedItemPosition())
+  conf.set('task', u.spTask.getSelectedItemPosition())
+  let clickMode: boolean[] = [u.raAcc.isChecked(), u.raRoot.isChecked(), u.raShell.isChecked()]
+  conf.set('click', clickMode.indexOf(true))
+}
+function readConfig(u: any) {
+  conf.doIfGet('game', v => u.spGame.setSelection(v))
+  conf.doIfGet('task', v => u.spTask.setSelection(v))
+  conf.doIfGet('click', v => {
+    ([u.raAcc, u.raRoot, u.raShell])[v].setChecked(true)
   })
+}
+function initUI(u: any) {
+
+  renderUI(u, XML_UI, {
+    task: data.task.map((i) => i.name),
+    game: data.games.map((i: any) => i.name)
+  })
+
   initConsole(u)
+  readConfig(u)
   u.cbConsole.on('check', (checked: boolean) => {
     logger.setEnable(checked)
   })
+
   u.btnLaunch.on('click', () => {
+    saveConfig(u)
+    let task = data.task[u.spTask.getSelectedItemPosition()].src
     threads.start(() => {
+      (device as any).keepScreenDim()
       capture.requestPermission()
+      sleep(1000)
+      auto.waitFor()
+      sleep(1000)
+      try {
+        task.start()
+      } catch (e) {
+        throw e
+      } finally {
+        device.cancelKeepingAwake()
+      }
+
     })
   })
 }
