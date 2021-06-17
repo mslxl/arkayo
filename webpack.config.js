@@ -4,8 +4,7 @@ const fs = require('fs')
 const AutoProWebpackPlugin = require('@auto.pro/webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const JavaScriptObfuscator = require('webpack-obfuscator')
-
+const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 const ProjectJson = require('./builder/plugin/ProjectJson')
 
 const pkgCfg = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'package.json')))
@@ -56,7 +55,7 @@ const webpack = {
           from: './src/',
           to: '',
           globOptions: {
-            ignore: ['**/*.js', '**/*.ts', '**/*.xml']
+            ignore: ['**/*.js', '**/*.ts', '**/*.xml', '**/*.json']
           }
         }
       ],
@@ -70,6 +69,23 @@ const webpack = {
   ],
   optimization: {
     minimize: prod,
+    minimizer: [
+      new ParallelUglifyPlugin({
+        cacheDir: '.cache/',
+        test: /.js$/,
+        uglifyJS: {
+          output: {
+            beautify: false,
+            comments: false
+          },
+          compress: {
+            drop_console: false,
+            collapse_vars: true,
+            reduce_vars: true
+          }
+        },
+      }),
+    ]
   },
   resolve: {
     extensions: ['.js', '.ts']
@@ -77,16 +93,7 @@ const webpack = {
 }
 
 if (prod) {
-  webpack.plugins.push(new JavaScriptObfuscator({
-    compact: true,
-    //selfDefending: true,
-    rotateStringArray: true,
-    stringArray: true,
-    renameGlobals: false,
-    //deadCodeInjectionThreshold: 1,
-    //debugProtection: true,
-    identifierNamesGenerator: 'mangled'
-  }))
+  // ?
 }
 
 module.exports = webpack
