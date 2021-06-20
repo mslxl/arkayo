@@ -24,7 +24,7 @@ function initOCR() {
 
 export function detect(img: Image, mul: number = 1): OcrResult[] {
   initOCR()
-  logger.i('Detect text by hraps ocr...')
+  logger.v('Detect text by hraps ocr...')
   let bitmap = (img as any).getBitmap()
   let res: OcrResult[] = ocr.detect(bitmap, mul)
   let v = JSON.stringify(res)
