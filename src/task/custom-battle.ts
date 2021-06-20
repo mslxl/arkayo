@@ -25,7 +25,7 @@ export default class CustomBattle extends TaskRunner {
           core.wait(5)
           recognized = true
         } else if (t.t.indexOf('接管作战') != -1 || t.t.indexOf('代理指挥作战正常') != -1) {
-          logger.v('[CustomBattle] War, war, never change')
+          logger.i('[CustomBattle] War, war, never change')
           core.wait(20)
           recognized = true
         } else if (t.t.indexOf('使用至纯源石恢复') != -1 || t.t.indexOf('使用药剂恢复') != -1 || t.t.indexOf('是否花费以上') != -1) {
@@ -34,7 +34,7 @@ export default class CustomBattle extends TaskRunner {
           return
         } else if (t.t.indexOf('行动结束') != -1 || t.t.indexOf('全员信赖') != -1
           || t.t.indexOf('常规掉落') != -1) {
-          logger.v('[CustomBattle] The battlefield is a place of tragedy. I hope they come to understand this one day.')
+          logger.i('[CustomBattle] The battlefield is a place of tragedy. I hope they come to understand this one day.')
           core.clickXY(random(1, device.height), random(1, device.width))
           recognized = true
         }

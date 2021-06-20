@@ -12,7 +12,7 @@ export default class AllInOne extends TaskRunner {
       new CommitMission()
     ]
     tasks.forEach((task, index) => {
-      logger.i(`[All-In-One]: ${index + 1}/${tasks.length}`)
+      logger.i(`[All-In-One]: ${index + 1}/${tasks.length} - ${task.constructor.name}`)
       task.start()
       core.wait(20)
     })
