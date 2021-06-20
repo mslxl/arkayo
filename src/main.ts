@@ -88,12 +88,15 @@ function initUI(u: any) {
     saveConfig(u)
     let task = data.task[u.spTask.getSelectedItemPosition()].src
     threads.start(() => {
-      (device as any).keepScreenDim()
+      (device as any).keepScreenOn()
       capture.requestPermission()
       sleep(1000)
       auto.waitFor()
       sleep(1000)
       try {
+        let game = JSON_GAME[conf.get('game')]
+        toastLog(`Launch ${game.name}`)
+        launch(game.pkg)
         task.start()
       } catch (e) {
         throw e
