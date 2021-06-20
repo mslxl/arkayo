@@ -8,69 +8,81 @@ export default class CommitMission extends TaskRunner {
   start(): void {
     capture.refresh()
     // Detect mission clue
-    let pos = colorHelper.findColorsWithCache('BlueBlockWhichIsTheSymbolOfMissionWereComplete',capture.shot(), "#ea4b06", [[45, 2, "#e76129"], [77, -13, "#e76129"], [108, 7, "#e76129"], [109, 42, "#e76129"], [76, 56, "#e76129"], [43, 37, "#e7622b"], [75, 50, "#dad9d9"], [77, 45, "#e76129"], [77, 2, "#e76129"]])
+    // 利用 opencv 二值化后匹配 6 边形
+    let inranged = colorHelper.opencvInRange(capture.shot(), [35.0, 90.0, 220.0], [45.0, 100.0, 240.0])
+    let pos = colorHelper.opencvDetectPolyLocation(inranged, 6)
+    inranged.recycle()
 
-    if (pos) {
-      core.clickXY(pos.x, pos.y + 20)
+    if (pos.length == 1) {
+      core.clickXY(pos[0].x, pos[0].y + 20)
       core.wait(10)
       this.commit()
     }
     $debug.gc()
   }
+
   commit(): void {
     let retryTimes = 0
+    outter:
     while (true) {
+
       capture.refresh()
-      let pos = colorHelper.findMultiColors(capture.shot(), "#ffffff", [[37, 6, "#ff6801"], [44, 1, "#ff6801"], [42, 13, "#ff6801"], [47, 6, "#ff6801"]])
-      if (pos) {
-        core.clickXY(pos.x, pos.y + 30)
+      let text = ocr.wrapResult(ocr.detect(capture.shot()))
+      for (const elem of text) {
+        if (elem.t == "点击领取") {
+          core.clickXY(elem.x, elem.y)
+          continue outter
+        }
+      }
+
+      if(this.checkObtain()){
+        continue outter
+      }
+
+
+      capture.refresh()
+      // 利用 opencv 二值化后匹配 4 边形 mode= Imgproc.RETR_LIST = 1
+      let inranged = colorHelper.opencvInRange(capture.shot(), [0.0, 100.0, 210.0], [20.0, 105.0, 255.0])
+      let pos = colorHelper.opencvDetectPolyLocation(inranged, 4, 1)
+      inranged.recycle()
+
+      if (pos.length > 0) {
+        core.clickXY(pos[0].x - random(0, 30), pos[0].y + random(20, 30))
         retryTimes = 0
       } else {
         retryTimes++
         logger.v('Did not find any new completed mission, retry...')
         if (retryTimes > 10) {
           logger.v('It seems like all missions are completed.')
-          this.back()
+          back()
           return
         }
-        continue
+        continue outter
       }
-      capture.refresh()
-      let text = ocr.wrapResult(ocr.detect(capture.shot()))
-      for (const elem of text) {
-        if (elem.t == "点击领取") {
-          core.clickXY(elem.x, elem.y)
-          break
-        }
-      }
-      core.wait(5)
-      this.checkObtain()
+
+
+    
     }
   }
-  back():void{
-    capture.refresh()
-    let pos = colorHelper.findMultiColorsWithCache('BackButtonInToolbar',capture.shot(),"#ffffff",[[-20,22,"#fbfbfb"],[0,45,"#f6f5f6"],[4,18,"#313031"]])
-    if(pos){
-      core.clickPos(pos)
-    }
-  }
-  checkObtain(): void {
+
+  checkObtain(): boolean {
     capture.refresh()
     logger.v('Check resource obtaining...')
     let img = capture.shot()
     let text = ocr.wrapResult(ocr.detect(img))
     for (const elem of text) {
       if (elem.t == "获得物资") {
-        let pos = colorHelper.findMultiColorsWithCache('YesButtonToAcquireRes',img,"#2b2929",[[-17,7,"#838270"],[0,22,"#a6a496"],[23,-5,"#8b8877"]])
-        if(pos){
+        let pos = images.findMultiColors(img, "#2b2929", [[-17, 7, "#838270"], [0, 22, "#a6a496"], [23, -5, "#8b8877"]])
+        if (pos) {
           core.clickPos(pos)
-        }else{
+        } else {
           core.clickXY(elem.x, elem.y)
         }
         core.wait(5)
-        break
+        return true
       }
     }
+    return false
   }
 
 }
