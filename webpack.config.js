@@ -104,7 +104,10 @@ const webpack = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.ts']
+    extensions: ['.js', '.ts'],
+    alias: {
+      'debug-flow': path.resolve('src', 'debug', prod ? 'prod.ts' : 'dev.ts')
+    }
   }
 }
 
