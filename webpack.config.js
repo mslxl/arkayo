@@ -32,7 +32,7 @@ const webpack = {
     filename: output_file,
   },
   mode: process.env.NODE_ENV,
-  devtool: false,
+  devtool: prod? false : 'inline-source-map',
   module: {
     rules: [
       {
@@ -101,7 +101,8 @@ const webpack = {
           }
         },
       }),
-    ]
+    ],
+
   },
   resolve: {
     extensions: ['.js', '.ts'],
