@@ -26,5 +26,5 @@ declare function exit(): void;
 declare function random(): number;
 declare function random(min: number, max: number): number;
 
-declare function requestScreenCapture():boolean
+declare function requestScreenCapture(land:boolean = false):boolean
 declare function captureScreen():Image

@@ -6,6 +6,13 @@ declare module "*.json" {
   const content: any;
   export default content;
 }
+declare module "debug-flow" {
+  export const debugStatus:boolean
+
+  export function debugBlock(block:()=>void)
+  
+  export function run<T> (block:()=>T):T
+}
 
 declare const runtime: any
 declare const colors: any
