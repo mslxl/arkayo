@@ -27,8 +27,8 @@
           <vertical>
             <text text="Other Config:" />
             <checkbox id="cbConsole" text="Show console dialog" />
-            <checkbox id="cb_kill" text="Kill game process after task is finished" />
-            <checkbox text="Shutdown after task is finished (Root needed)" />
+            <checkbox id="cbKill" text="Kill game process after task is finished" />
+            <checkbox id="cbPoweroff" text="Shutdown after task is finished (Root needed)" />
           </vertical>
         </card>
         <button id="btnLaunch" text="Launch" />

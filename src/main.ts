@@ -3,6 +3,7 @@ import JSON_GAME from './game.json'
 import * as logger from './logger'
 import * as capture from './capture'
 import * as conf from './config'
+import TaskExitGame from './task/exit-game'
 let androidx = Packages.androidx;
 
 import taskList from './task/task-list'
@@ -63,12 +64,22 @@ function saveConfig(u: any) {
   conf.set('task', u.spTask.getSelectedItemPosition())
   let clickMode: boolean[] = [u.raAcc.isChecked(), u.raRoot.isChecked(), u.raShell.isChecked()]
   conf.set('click', clickMode.indexOf(true))
+  conf.set('kill-game', u.cbKill.isChecked())
+  conf.set('poweroff', u.cbPoweroff.isChecked())
+  conf.set('console', u.cbConsole.isChecked())
 }
 function readConfig(u: any) {
   conf.doIfGet('game', v => u.spGame.setSelection(v))
   conf.doIfGet('task', v => u.spTask.setSelection(v))
   conf.doIfGet('click', v => {
     ([u.raAcc, u.raRoot, u.raShell])[v].setChecked(true)
+  })
+  conf.doIfGet('kill-game', (v) => u.cbKill.setChecked(v))
+  conf.doIfGet('poweroff', (v) => u.cbPoweroff.setChecked(v))
+  conf.doIfGet('console', (v) => {
+    u.cbConsole.setChecked(v)
+    logger.setEnable(v)
+    logger.hideConsole(false)
   })
 }
 function initUI(u: any) {
@@ -103,6 +114,12 @@ function initUI(u: any) {
         logger.i('[main]: Task finish')
       } finally {
         device.cancelKeepingAwake()
+        if (conf.getV('kill-game', true)) {
+          new TaskExitGame().start()
+        }
+        if (conf.getV('poweroff', false)) {
+          shell('reboot -p', true)
+        }
       }
 
     })
