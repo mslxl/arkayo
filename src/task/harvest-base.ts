@@ -5,6 +5,9 @@ import * as logger from '../logger'
 import * as core from '../core'
 import * as colorHelper from '../color'
 export default class HarvestBase extends TaskRunner {
+  getName(): string {
+    return "Harvest Base"
+  }
   start(): void {
     if (!this.enterBase()) {
       return

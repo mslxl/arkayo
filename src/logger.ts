@@ -1,4 +1,8 @@
-let isEnable = false
+let isEnable = false;
+
+(console as any).setGlobalLogConfig({
+  file:'/sdcard/Download/arkayo.log'
+})
 
 export function setEnable(enable:boolean) {
   isEnable = enable

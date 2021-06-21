@@ -5,6 +5,9 @@ import * as core from '../core'
 import * as colorHelper from '../color'
 
 export default class ExitGame extends TaskRunner {
+  getName(): string {
+    return "Internal[ExitGame]"
+  }
   start(): void {
     while(true){
         capture.refresh()

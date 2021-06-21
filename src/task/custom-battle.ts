@@ -8,6 +8,9 @@ import * as flow from 'debug-flow'
 
 
 export default class CustomBattle extends TaskRunner {
+  getName(): string {
+    return "Custom Battle"
+  }
   start(): void {
 
     core.wait(5)

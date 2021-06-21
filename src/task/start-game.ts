@@ -5,6 +5,9 @@ import * as logger from '../logger'
 import * as core from '../core'
 
 export default class StartGame extends TaskRunner {
+  getName(): string {
+    return "Start Game"
+  }
   start(): void {
     core.wait(5)
     while (true) {

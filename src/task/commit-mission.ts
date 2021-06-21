@@ -5,6 +5,9 @@ import * as logger from '../logger'
 import * as core from '../core'
 import * as colorHelper from '../color'
 export default class CommitMission extends TaskRunner {
+  getName(): string {
+    return "Commit Mission"
+  }
   start(): void {
     capture.refresh()
     // Detect mission clue

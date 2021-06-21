@@ -9,6 +9,9 @@ import CustomBattle from './custom-battle'
 import * as core from '../core'
 import * as logger from '../logger'
 export default class AllInOne extends TaskRunner {
+  getName(): string {
+    return "All in one"
+  }
   start(): void {
     let tasks: TaskRunner[] = [
       new StartGame(),
@@ -19,7 +22,7 @@ export default class AllInOne extends TaskRunner {
       new CommitMission(),
     ]
     tasks.forEach((task, index) => {
-      logger.i(`[All-In-One]: ${index + 1}/${tasks.length} - ${task.constructor.name}`)
+      logger.i(`[All-In-One]: ${index + 1}/${tasks.length} - ${task.getName()}`)
       task.start()
       core.wait(20)
     })
