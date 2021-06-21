@@ -9,16 +9,24 @@ import * as flow from 'debug-flow'
 
 export default class CustomBattle extends TaskRunner {
   start(): void {
-    this.enableAutoDeploy()
+
     core.wait(5)
     let unrecognizedTimes = 0
+    outter:
     while (true) {
       let recognized = false
       capture.refresh()
       let texts = ocr.wrapResult(ocr.detect(capture.shot()))
       for (const t of texts) {
-        if (t.t.indexOf('开始行动') != -1 || t.t.indexOf('开始') != -1 || t.t.indexOf('行动') != -1) {
-          logger.v('[CustomBattle] Start Battle!')
+        if (t.t.indexOf('开始行动') != -1) {
+          logger.v('[CustomBattle] Prepare battle!')
+          core.clickRect(t)
+          recognized = true
+        } else if (t.t.indexOf('开始') != -1 || t.t.indexOf('行动') != -1) {
+          if(!this.checkAutoDeploy()){
+            continue outter
+          }
+          logger.v('[CustomBattle] Battle start!')
           core.clickRect(t)
           recognized = true
         } else if (t.t.indexOf('正在提交') != -1 || t.t.indexOf('反馈神经') != -1 || t.t.indexOf('Loading') != -1) {
@@ -60,12 +68,10 @@ export default class CustomBattle extends TaskRunner {
 
 
   }
-  enableAutoDeploy() {
-    logger.i('Dectet whether auto deploy was enabled...')
-    capture.refresh()
+  checkAutoDeploy():boolean{
 
-    let ps = colorHelper.opencvDetectPolyLocation(colorHelper.opencvInRange(capture.shot(), [255, 255, 255], [255, 255, 255]), 4, 0, 300)
-    if (ps.length == 0) {
+    function goAndEnable() {
+      back()
       capture.refresh()
       let ts = ocr.wrapResult(ocr.detect(capture.shot()))
       for (const t of ts) {
@@ -74,7 +80,21 @@ export default class CustomBattle extends TaskRunner {
           break
         }
       }
+      core.wait(5)
     }
+
+
+    logger.i('Dectet whether auto deploy was enabled...')
+
+    capture.refresh()
+    let ts = ocr.wrapResult(ocr.detect(capture.shot()))
+    for (const t of ts) {
+      if (t.t.indexOf('本次行动配置') != -1 || t.t.indexOf('不可更改') != -1) {
+        return true
+      }
+    }
+    goAndEnable()
+    return false
   }
 
 
@@ -83,7 +103,7 @@ export default class CustomBattle extends TaskRunner {
       capture.refresh()
       let list = ocr.wrapResult(ocr.detect(capture.shot()))
       for (const item of list) {
-        if (item.t.indexOf('终端') != -1 || item.t.indexOf('采购中心') != -1 || item.t.indexOf('档案') != -1 || item.t.indexOf('好友') != -1 || item.t.indexOf('理智') != -1) {
+        if (item.t.indexOf('采购中心') != -1 || item.t.indexOf('档案') != -1 || item.t.indexOf('好友') != -1 || item.t.indexOf('理智') != -1) {
           return
         }
       }

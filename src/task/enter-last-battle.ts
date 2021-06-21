@@ -17,7 +17,7 @@ export default class EnterLast extends TaskRunner {
                     return
                 }
             }
-
+            core.wait(10)
         }
     }
 }
