@@ -97,12 +97,10 @@ function initUI(u: any) {
         let game = JSON_GAME[conf.get('game')]
         toastLog(`Launch ${game.name}`)
         launch(game.pkg)
-        sleep(2000)
+        sleep(5000)
         logger.i('[main]: Task start')
         task.start()
         logger.i('[main]: Task finish')
-      } catch (e) {
-        throw e
       } finally {
         device.cancelKeepingAwake()
       }

@@ -31,16 +31,21 @@ export function opencvInRange(img, lower, upper) {
 
     return result
 }
-
-export function opencvDetectPolyLocation(img, polyNum, mode) {
-    if (mode === void 0) { mode = 0; }
+/**
+ * 
+ * @param {*} img Not mat
+ * @param {*} polyNum 
+ * @param {*} mode findContours.mode
+ * @returns {x:number,y:number}[]
+ */
+export function opencvDetectPolyLocation(img, polyNum, mode = 0) {
 
     let mat = img.mat
     let contours = new ArrayList()
     let result = []
 
     Imgproc.findContours(mat, contours, new Mat(), mode, Imgproc.CHAIN_APPROX_SIMPLE, new Point(0.0, 0.0))
-   
+
     for (let i = 0; i < contours.size(); i++) {
         const elem = contours.get(i);
         let epsilon = 0.02 * Imgproc.arcLength(new MatOfPoint2f(elem.toArray()), true)
@@ -75,5 +80,73 @@ export function opencvDetectPolyLocation(img, polyNum, mode) {
             })
         }
     }
+    return result
+}
+
+export function opencvDetectColorLocation(img, lower, upper) {
+
+    let cvtImg = debugFlow.run(() => {
+        let org = img.clone()
+        let ret = opencvInRange(org, lower, upper)
+        org.recycle()
+        return ret
+    })
+
+    let mat = cvtImg.mat
+    let target = new Mat(mat.size(), mat.type())
+    let list = new ArrayList()
+    Imgproc.findContours(mat, list, new Mat(), Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE)
+    debugFlow.debugBlock(() => {
+        logger.v(`opencvDetectColorLocation: size ${list.size()}`)
+        Imgproc.cvtColor(target, target, Imgproc.COLOR_GRAY2BGR)
+    })
+    let result = []
+    for (let i = 0; i < list.size(); i++) {
+        let point = list.get(i)
+
+        let rect = Imgproc.boundingRect(point)
+        let returnItem = {
+            x: rect.x,
+            y: rect.y,
+            w: rect.width,
+            h: rect.height,
+            centreX: rect.x + rect.width / 2,
+            centreY: rect.y + rect.height / 2
+        }
+        result.push(returnItem)
+
+        debugFlow.debugBlock(() => {
+            let tmpList = new ArrayList()
+            tmpList.add(point)
+            Imgproc.drawContours(target, tmpList, -1, new Scalar(0.0, 0.0, 255.0))
+
+            Imgproc.rectangle(target, new Point(rect.x, rect.y),
+                new Point(rect.x + rect.width, rect.y + rect.height),
+                new Scalar(255.0, 255.0, 0.0)
+            )
+            Imgproc.drawMarker(target, new Point(returnItem.centreX, returnItem.centreY), new Scalar(255.0, 0.0, 0.0))
+
+            let saveImg = images.matToImage(target)
+            images.save(saveImg, '/sdcard/detectColor.jpg')
+            saveImg.recycle()
+        })
+    }
+    debugFlow.debugBlock(() => {
+        logger.v(`opencvDetectColorLocation:  ${JSON.stringify(result)}`)
+    })
+    cvtImg.recycle()
+    img.recycle()
+    $debug.gc()
+    return result
+}
+
+export function searchCircle(img, minRadius = 0, maxRadius = 0) {
+    let gray = images.cvtColor(img, "BGR2GRAY")
+    let result = images.findCircles(gray, {
+        minRadius:minRadius,
+        maxRadius:maxRadius,
+        minDst:50
+    })
+    gray.recycle()
     return result
 }

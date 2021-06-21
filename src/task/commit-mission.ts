@@ -10,7 +10,7 @@ export default class CommitMission extends TaskRunner {
     // Detect mission clue
     // 利用 opencv 二值化后匹配 6 边形
     let inranged = colorHelper.opencvInRange(capture.shot(), [35.0, 90.0, 220.0], [45.0, 100.0, 240.0])
-    let pos = colorHelper.opencvDetectPolyLocation(inranged, 6)
+    let pos = colorHelper.opencvDetectPolyLocation(inranged, 6, 0)
     inranged.recycle()
 
     if (pos.length == 1) {
@@ -35,7 +35,7 @@ export default class CommitMission extends TaskRunner {
         }
       }
 
-      if(this.checkObtain()){
+      if (this.checkObtain()) {
         continue outter
       }
 
@@ -61,7 +61,7 @@ export default class CommitMission extends TaskRunner {
       }
 
 
-    
+
     }
   }
 
