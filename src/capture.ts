@@ -5,7 +5,7 @@ let img: any
 
 export function requestPermission() {
   if (!isPermit) {
-    if (!requestScreenCapture()) {
+    if (!requestScreenCapture(true)) {
       toastLog("Request Screen Capture failed");
     } else {
       isPermit = true
