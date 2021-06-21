@@ -29,7 +29,7 @@ export default class HarvestBase extends TaskRunner {
       let texts = ocr.wrapResult(ocr.detect(capture.shot()))
 
       for (const t of texts) {
-        if (t.t.indexOf('交付') != -1 || t.t.indexOf('订单') != -1 || t.t.indexOf('收获') != -1) {
+        if (t.t.indexOf('交付') != -1 || t.t.indexOf('订单') != -1 || t.t.indexOf('收获') != -1 || t.t.indexOf('信赖') != -1 || t.t.indexOf('收取') != -1) {
           core.clickRect(t)
           core.wait(10)
           continue outter
