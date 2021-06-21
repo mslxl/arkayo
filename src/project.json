@@ -1,3 +1,34 @@
 {
-  
+    "launchConfig": {
+        "displaySplash": false,
+        "hideLogs": false,
+        "splashText": "Akayo - Save students from Arknights :)",
+        "stableMode": false
+    },
+    "permissionConfig": {
+        "manifestPermissions": [
+            "android.permission.WRITE_EXTERNAL_STORAGE",
+            "android.permission.SYSTEM_ALERT_WINDOW",
+            "android.permission.WAKE_LOCK",
+            "android.permission.FOREGROUND_SERVICE",
+            "android.permission.REORDER_TASKS",
+            "android.permission.REQUEST_COMPANION_RUN_IN_BACKGROUND",
+            "android.permission.RUN_IN_BACKGROUND",
+            "android.permission.READ_EXTERNAL_STORAGE"
+        ],
+        "requestListOnStartup": [
+            "android.permission.WRITE_EXTERNAL_STORAGE",
+            "android.permission.SYSTEM_ALERT_WINDOW",
+            "android.permission.WAKE_LOCK",
+            "android.permission.FOREGROUND_SERVICE",
+            "android.permission.REORDER_TASKS",
+            "android.permission.REQUEST_COMPANION_RUN_IN_BACKGROUND",
+            "android.permission.RUN_IN_BACKGROUND",
+            "android.permission.READ_EXTERNAL_STORAGE"
+        ]
+    },
+    "optimization": {
+        "removeOpenCv": false,
+        "unusedResources": false
+    }
 }
