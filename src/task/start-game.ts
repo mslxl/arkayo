@@ -2,10 +2,8 @@ import TaskRunner from './i'
 import * as capture from '../capture'
 import * as ocr from '../ocr'
 import * as logger from '../logger'
-import * as conf from '../config'
 import * as core from '../core'
-import * as colorHelper from '../color'
-import JSON_GAME from '../game.json'
+
 export default class StartGame extends TaskRunner {
   start(): void {
     core.wait(5)

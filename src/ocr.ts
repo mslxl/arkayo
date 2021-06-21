@@ -1,4 +1,6 @@
 import * as logger from './logger'
+import * as debug from 'debug-flow'
+
 function installPlugin() {
   app.openUrl('https://wws.lanzoux.com/iduulmofune')
   do {
@@ -28,7 +30,7 @@ export function detect(img: Image, mul: number = 1): OcrResult[] {
   let bitmap = (img as any).getBitmap()
   let res: OcrResult[] = ocr.detect(bitmap, mul)
   let v = JSON.stringify(res)
-  logger.v(v)
+  debug.debugBlock(() => logger.v(v))
   bitmap.recycle()
   return JSON.parse(v)
 }

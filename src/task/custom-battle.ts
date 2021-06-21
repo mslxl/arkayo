@@ -3,13 +3,14 @@ import * as capture from '../capture'
 import * as ocr from '../ocr'
 import * as core from '../core'
 import * as logger from '../logger'
+import * as colorHelper from '../color'
+import * as flow from 'debug-flow'
 
-function clickT(t: { x: number, y: number, w: number, h: number }) {
-  core.clickXY(t.x + random(0, t.w), t.y + random(0, t.h))
-}
 
 export default class CustomBattle extends TaskRunner {
   start(): void {
+    this.enableAutoDeploy()
+    core.wait(5)
     let unrecognizedTimes = 0
     while (true) {
       let recognized = false
@@ -18,7 +19,7 @@ export default class CustomBattle extends TaskRunner {
       for (const t of texts) {
         if (t.t.indexOf('开始行动') != -1 || t.t.indexOf('开始') != -1 || t.t.indexOf('行动') != -1) {
           logger.v('[CustomBattle] Start Battle!')
-          clickT(t)
+          core.clickRect(t)
           recognized = true
         } else if (t.t.indexOf('正在提交') != -1 || t.t.indexOf('反馈神经') != -1 || t.t.indexOf('Loading') != -1) {
           logger.v('[CustomBattle] Wait...')
@@ -30,6 +31,7 @@ export default class CustomBattle extends TaskRunner {
           recognized = true
         } else if (t.t.indexOf('使用至纯源石恢复') != -1 || t.t.indexOf('使用药剂恢复') != -1 || t.t.indexOf('是否花费以上') != -1) {
           back()
+          this.back()
           logger.v('[CustomBattle] Task fin')
           return
         } else if (t.t.indexOf('行动结束') != -1 || t.t.indexOf('全员信赖') != -1
@@ -55,6 +57,37 @@ export default class CustomBattle extends TaskRunner {
         unrecognizedTimes = 0
       }
     }
+
+
+  }
+  enableAutoDeploy() {
+    logger.i('Dectet whether auto deploy was enabled...')
+    capture.refresh()
+
+    let ps = colorHelper.opencvDetectPolyLocation(colorHelper.opencvInRange(capture.shot(), [255, 255, 255], [255, 255, 255]), 4, 0, 300)
+    if (ps.length == 0) {
+      capture.refresh()
+      let ts = ocr.wrapResult(ocr.detect(capture.shot()))
+      for (const t of ts) {
+        if (t.t.indexOf('代理指挥') != -1) {
+          core.clickRect(t)
+          break
+        }
+      }
+    }
   }
 
+
+  back() {
+    while (true) {
+      capture.refresh()
+      let list = ocr.wrapResult(ocr.detect(capture.shot()))
+      for (const item of list) {
+        if (item.t.indexOf('终端') != -1 || item.t.indexOf('采购中心') != -1 || item.t.indexOf('档案') != -1 || item.t.indexOf('好友') != -1 || item.t.indexOf('理智') != -1) {
+          return
+        }
+      }
+      back()
+    }
+  }
 }

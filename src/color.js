@@ -36,9 +36,10 @@ export function opencvInRange(img, lower, upper) {
  * @param {*} img Not mat
  * @param {*} polyNum 
  * @param {*} mode findContours.mode
+ * @param {number} minArea 面积
  * @returns {x:number,y:number}[]
  */
-export function opencvDetectPolyLocation(img, polyNum, mode = 0) {
+export function opencvDetectPolyLocation(img, polyNum, mode = 0, minArea = 0) {
 
     let mat = img.mat
     let contours = new ArrayList()
@@ -56,9 +57,15 @@ export function opencvDetectPolyLocation(img, polyNum, mode = 0) {
         let x = parseInt(moment.m10 / moment.m00)
         let y = parseInt(moment.m01 / moment.m00)
         let curPolyNum = contourPloy.toArray().length
-        logger.v(`Detected ${curPolyNum} poly at (${x}, ${y}) ${curPolyNum == polyNum ? "!!Target!!" : ""}`)
+
 
         if (curPolyNum == polyNum) {
+            if (minArea != 0) {
+                if (Imgproc.contourArea(elem) < minArea) {
+                    continue
+                }
+            }
+            logger.v(`Detected ${curPolyNum} poly at (${x}, ${y}) area = ${Imgproc.contourArea(elem)}!!Target!!`)
             debugFlow.debugBlock(() => {
                 let paint = img.clone()
                 let paintMat = paint.mat
@@ -78,8 +85,11 @@ export function opencvDetectPolyLocation(img, polyNum, mode = 0) {
                 x: x,
                 y: y
             })
+        } else {
+            logger.v(`Detected ${curPolyNum} poly at (${x}, ${y})`)
         }
     }
+    img.recycle()
     return result
 }
 
@@ -126,12 +136,12 @@ export function opencvDetectColorLocation(img, lower, upper) {
             )
             Imgproc.drawMarker(target, new Point(returnItem.centreX, returnItem.centreY), new Scalar(255.0, 0.0, 0.0))
 
-            let saveImg = images.matToImage(target)
-            images.save(saveImg, '/sdcard/detectColor.jpg')
-            saveImg.recycle()
         })
     }
     debugFlow.debugBlock(() => {
+        let saveImg = images.matToImage(target)
+        images.save(saveImg, '/sdcard/detectColor.jpg')
+        saveImg.recycle()
         logger.v(`opencvDetectColorLocation:  ${JSON.stringify(result)}`)
     })
     cvtImg.recycle()
@@ -143,9 +153,9 @@ export function opencvDetectColorLocation(img, lower, upper) {
 export function searchCircle(img, minRadius = 0, maxRadius = 0) {
     let gray = images.cvtColor(img, "BGR2GRAY")
     let result = images.findCircles(gray, {
-        minRadius:minRadius,
-        maxRadius:maxRadius,
-        minDst:50
+        minRadius: minRadius,
+        maxRadius: maxRadius,
+        minDst: 50
     })
     gray.recycle()
     return result

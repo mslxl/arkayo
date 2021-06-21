@@ -3,6 +3,8 @@ import TaskRunner from './i'
 import StartGame from './start-game'
 import CommitMission from './commit-mission'
 import HarvestBase from './harvest-base'
+import EnterLast from './enter-last-battle'
+import CustomBattle from './custom-battle'
 
 import * as core from '../core'
 import * as logger from '../logger'
@@ -10,6 +12,9 @@ export default class AllInOne extends TaskRunner {
   start(): void {
     let tasks: TaskRunner[] = [
       new StartGame(),
+      new HarvestBase(),
+      new EnterLast(),
+      new CustomBattle(),
       new HarvestBase(),
       new CommitMission(),
     ]

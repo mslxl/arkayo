@@ -23,21 +23,26 @@ export function hideConsole(wait:boolean = false) {
 }
 
 export function log(str:any) {
+  showConsole()
   console.log(str)
 }
 
 export function i(str:any){
+  showConsole()
   console.info(str)
 }
 
 export function v(str:any){
+  showConsole()
   console.verbose(str)
 }
 
 export function e(str:any){
+  showConsole()
   console.error(str)
 }
 
 export function trace(str:any){
+  showConsole()
   console.trace(str)
 }
