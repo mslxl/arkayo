@@ -12,8 +12,6 @@
   "author": "Tagigxo",
   "license": "GPL-3.0",
   "devDependencies": {
-    "@auto.pro/webpack-loader": "^8.12.5",
-    "@auto.pro/webpack-plugin": "^8.13.1",
     "@babel/core": "^7.14.3",
     "@babel/plugin-transform-modules-commonjs": "^7.14.0",
     "@babel/plugin-transform-runtime": "^7.14.3",
@@ -30,7 +28,6 @@
     "webpack": "^5.37.0",
     "webpack-bundle-analyzer": "^4.4.2",
     "webpack-cli": "^4.7.0",
-    "webpack-obfuscator": "^3.3.1",
     "webpack-parallel-uglify-plugin": "^2.0.0"
   },
   "config": {

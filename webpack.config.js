@@ -1,12 +1,11 @@
 const path = require('path');
 const fs = require('fs')
 
-const AutoProWebpackPlugin = require('@auto.pro/webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 const ProjectJson = require('./builder/plugin/ProjectJson')
-
+const UiMode = require('./builder/plugin/UiMode')
 const pkgCfg = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'package.json')))
 
 
@@ -23,8 +22,6 @@ let autojsIgnore = fs.readFileSync(path.resolve(process.cwd(), 'src', '.autojs.b
   .map(s => fs.realpathSync(path.resolve(process.cwd(), 'src', s)))
   .concat([])
 
-console.log(autojsIgnore)
-
 const webpack = {
   entry: './src/main.ts',
   output: {
@@ -37,7 +34,7 @@ const webpack = {
     rules: [
       {
         test: /\.js$/,
-        use: ["babel-loader", "@auto.pro/webpack-loader"],
+        use: ["babel-loader"],
         exclude: /node_modules/
       },
       {
@@ -48,8 +45,7 @@ const webpack = {
             options: {
               configFile: "tsconfig.json"
             }
-          },
-          "@auto.pro/webpack-loader"
+          }
         ],
         exclude: /node_modules/,
 
@@ -57,9 +53,7 @@ const webpack = {
     ],
   },
   plugins: [
-    new AutoProWebpackPlugin({
-      ui: [output_file.split('.')[0]]
-    }),
+    new UiMode(),
     new CopyPlugin({
       patterns: [
         {
