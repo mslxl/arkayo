@@ -49,6 +49,10 @@ export function wrapResult(res: OcrResult[]): WrapResult[] {
   })
 }
 
+export function detectAndWrap(img:Image,mul:number=1):WrapResult[] {
+  return wrapResult(detect(img,mul))
+}
+
 export function findAnyText(text: string[], metaData: WrapResult[]): WrapResult | null {
   let lines = metaData 
   for (const item of lines) {
