@@ -23,19 +23,26 @@ let autojsIgnore = fs.readFileSync(path.resolve(process.cwd(), 'src', '.autojs.b
   .concat([])
 
 const webpack = {
-  entry: './src/main.ts',
+  entry: ['./src/main.ts'],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: output_file,
   },
   mode: process.env.NODE_ENV,
-  devtool: prod? false : 'inline-source-map',
+  devtool: prod ? false : 'inline-source-map',
+  resolveLoader: {
+    modules: [path.join(__dirname, 'builder', 'loader'), 'node_modules']
+  },
   module: {
     rules: [
       {
         test: /\.js$/,
-        use: ["babel-loader"],
+        use: "babel-loader",
         exclude: /node_modules/
+      },
+      {
+        test: /\.(jpg|png)/,
+        use: 'pic-loader'
       },
       {
         test: /\.ts?$/,
@@ -48,7 +55,6 @@ const webpack = {
           }
         ],
         exclude: /node_modules/,
-
       },
     ],
   },

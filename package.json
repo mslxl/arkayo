@@ -13,12 +13,13 @@
   "license": "GPL-3.0",
   "devDependencies": {
     "@babel/core": "^7.14.3",
-    "@babel/plugin-transform-modules-commonjs": "^7.14.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.14.5",
     "@babel/plugin-transform-runtime": "^7.14.3",
     "@babel/preset-env": "^7.14.2",
     "@babel/runtime": "^7.14.0",
     "babel-loader": "^8.2.2",
     "copy-webpack-plugin": "^8.1.1",
+    "core-js": "3",
     "cross-env": "^7.0.3",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.26.0",
@@ -34,5 +35,6 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  }
+  },
+  "dependencies": {}
 }
