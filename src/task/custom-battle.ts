@@ -6,6 +6,7 @@ import * as logger from '../logger'
 import * as colorHelper from '../color'
 import * as flow from 'debug-flow'
 
+import BackToMain from './back-to-main'
 
 export default class CustomBattle extends TaskRunner {
   getName(): string {
@@ -26,7 +27,7 @@ export default class CustomBattle extends TaskRunner {
           core.clickRect(t)
           recognized = true
         } else if (t.t.indexOf('开始') != -1 || t.t.indexOf('行动') != -1) {
-          if(!this.checkAutoDeploy()){
+          if (!this.checkAutoDeploy()) {
             continue outter
           }
           logger.v('[CustomBattle] Battle start!')
@@ -40,13 +41,19 @@ export default class CustomBattle extends TaskRunner {
           logger.i('[CustomBattle] War, war, never change')
           core.wait(20)
           recognized = true
-        } else if (t.t.indexOf('使用至纯源石恢复') != -1 || t.t.indexOf('使用药剂恢复') != -1 || t.t.indexOf('是否花费以上') != -1) {
+        } 
+        // else if(t.t.indexOf('3天')!= -1 || t.t.indexOf('2天')!= -1 || t.t.indexOf('1天') != -1){
+        // TODO 用临界药
+        // } 
+        else if (t.t.indexOf('使用至纯源石恢复') != -1 || t.t.indexOf('使用药剂恢复') != -1 || t.t.indexOf('是否花费以上') != -1) {
           back()
           this.back()
           logger.v('[CustomBattle] Task fin')
           return
         } else if (t.t.indexOf('行动结束') != -1 || t.t.indexOf('全员信赖') != -1
-          || t.t.indexOf('常规掉落') != -1) {
+          || t.t.indexOf('常规掉落') != -1|| t.t.indexOf('剩余防御点') != -1
+          || t.t.indexOf('作战简报') != -1|| t.t.indexOf('速度耗时') != -1
+          || t.t.indexOf('龙门币奖励') != -1) {
           logger.i('[CustomBattle] The battlefield is a place of tragedy. I hope they come to understand this one day.')
           core.clickXY(random(1, device.height), random(1, device.width))
           recognized = true
@@ -71,7 +78,7 @@ export default class CustomBattle extends TaskRunner {
 
 
   }
-  checkAutoDeploy():boolean{
+  checkAutoDeploy(): boolean {
 
     function goAndEnable() {
       back()
@@ -102,15 +109,6 @@ export default class CustomBattle extends TaskRunner {
 
 
   back() {
-    while (true) {
-      capture.refresh()
-      let list = ocr.wrapResult(ocr.detect(capture.shot()))
-      for (const item of list) {
-        if (item.t.indexOf('采购中心') != -1 || item.t.indexOf('档案') != -1 || item.t.indexOf('好友') != -1 || item.t.indexOf('理智') != -1) {
-          return
-        }
-      }
-      back()
-    }
+    new BackToMain().start()
   }
 }
