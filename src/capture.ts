@@ -17,7 +17,7 @@ export function setAutoCapture(enable: boolean) {
   isAutoCapture = enable
 }
 
-export function shot() {
+export function shot():Image {
   if (img === null || isAutoCapture || img.isRecycled()) {
     refresh(false)
   }

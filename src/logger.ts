@@ -22,7 +22,7 @@ export function showConsole() {
 export function hideConsole(wait:boolean = false) {
   console.hide()
   if(wait){
-    sleep(200)
+    sleep(800)
   }
 }
 

@@ -29,7 +29,7 @@ export default class StartGame extends TaskRunner {
             core.clickXY(item.x, item.y)
             recognized = true
             break
-          } else if (item.t.indexOf('活动公告') != -1) {
+          } else if (item.t.indexOf('活动公告') != -1 || item.t.indexOf('签到') != -1|| item.t.indexOf('一日之计') != -1|| item.t.indexOf('今日配给') != -1) {
             back()
             recognized = true
             break

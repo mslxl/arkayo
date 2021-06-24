@@ -30,13 +30,13 @@ export default class CommitMission extends TaskRunner {
     while (true) {
 
       capture.refresh()
-      let text = ocr.wrapResult(ocr.detect(capture.shot()))
-      for (const elem of text) {
-        if (elem.t == "点击领取") {
-          core.clickXY(elem.x, elem.y)
-          continue outter
-        }
+      let elem = ocr.findText("点击领取", ocr.wrapResult(ocr.detect(capture.shot())))
+
+      if (elem) {
+        core.clickXY(elem.x, elem.y)
+        continue outter
       }
+
 
       if (this.checkObtain()) {
         continue outter
@@ -55,7 +55,7 @@ export default class CommitMission extends TaskRunner {
       } else {
         retryTimes++
         logger.v('Did not find any new completed mission, retry...')
-        if (retryTimes > 10) {
+        if (retryTimes > 5) {
           logger.v('It seems like all missions are completed.')
           back()
           return
