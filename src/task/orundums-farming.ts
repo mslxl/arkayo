@@ -48,9 +48,11 @@ class EnterBattle extends TaskRunner{
     refresh()
     t = findAnyText(['每周报酬','理智'],wrapResult(detect(shot())))
     new BackToMain().start()
-    if(false){
+    if(t){
+      logger.i('Enter longmen...')
       new EnterLongmen().start()
     }else{
+      logger.i('Enter 1-7')
       new Enter1T7().start()
     }
   }

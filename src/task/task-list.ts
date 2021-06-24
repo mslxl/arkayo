@@ -4,13 +4,15 @@ import TaskAll from './all-in-one'
 import TaskCommitMission from './commit-mission'
 import TaskHarvestBase from './harvest-base'
 import TaskRecruit from './recruit'
+import TaskPrepareBase from './prepare-base'
 import TaskOrundums from './orundums-farming'
 const tasks = [
   new TaskCustomBattle(),
   new TaskStartGame(),
   new TaskCommitMission(),
   new TaskHarvestBase(),
-  new TaskRecruit(),
+  //new TaskRecruit(),
+  new TaskPrepareBase(),
   new TaskAll(),
   new TaskOrundums()
 ].map((t) => {
