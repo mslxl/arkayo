@@ -25,7 +25,19 @@ export function clickPos(pos: Point) {
   clickXY(pos.x, pos.y)
 }
 export function clickRect(rect: { x: number, y: number, w: number, h: number }) {
-  clickXY(random(rect.x, rect.x + rect.w), random(rect.y, rect.y + rect.h))
+  let x;
+  let y;
+  if (rect.w > 20) {
+    x = random(rect.x + 10, rect.x + rect.w - 10)
+  } else {
+    x = random(rect.x, rect.x + rect.w)
+  }
+  if (rect.h > 20) {
+    y = random(rect.y + 10, rect.y + rect.h - 10)
+  } else {
+    y = random(rect.y, rect.y + rect.h)
+  }
+  clickXY(x, y)
 }
 export function wait(s: number) {
   logger.v(`Wait ${s}s`)

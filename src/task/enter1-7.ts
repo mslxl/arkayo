@@ -13,7 +13,7 @@ export default class Enter1T7 extends TaskRunner {
 
         capture.setAutoCapture(true)
 
-        let t = ocr.findAnyText(['终端', '理智'], ocr.wrapResult(ocr.detect(capture.shot())))
+        let t = ocr.findAnyText(['终端'], ocr.wrapResult(ocr.detect(capture.shot())))
         if (!t) {
             new Back().start()
             return
