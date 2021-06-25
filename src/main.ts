@@ -1,9 +1,9 @@
-import XML_UI from 'raw-loader!./ui.xml'
-import JSON_GAME from './game.json'
+import XML_UI from 'raw-loader!./res/ui.xml'
+import JSON_GAME from './res/game.json'
 import * as logger from './logger'
 import * as capture from './capture'
 import * as conf from './config'
-import TaskExitGame from './task/exit-game'
+import TaskExitGame from './task/internal/exit-game'
 let androidx = Packages.androidx;
 
 import taskList from './task/task-list'

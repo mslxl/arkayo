@@ -1,7 +1,7 @@
-import * as capture from '../../capture'
-import * as ocr from '../../ocr'
-import * as core from '../../core'
-import * as loggger from '../../logger'
+import * as capture from '../../../capture'
+import * as ocr from '../../../ocr'
+import * as core from '../../../core'
+import * as loggger from '../../../logger'
 import {debugBlock} from 'debug-flow'
 
 importClass(org.opencv.core.Mat)

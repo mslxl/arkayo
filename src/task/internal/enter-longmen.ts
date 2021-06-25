@@ -1,9 +1,9 @@
-import TaskRunner from './i'
-import * as capture from '../capture'
-import * as ocr from '../ocr'
-import * as core from '../core'
+import TaskRunner from '../i'
+import * as capture from '../../capture'
+import * as ocr from '../../ocr'
+import * as core from '../../core'
 import Back from './back-to-main'
-import * as colorHelper from '../color'
+import * as colorHelper from '../../color'
 
 export default class EnterLongmen extends TaskRunner {
     getName(): string {

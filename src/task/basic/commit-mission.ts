@@ -1,9 +1,9 @@
-import TaskRunner from './i'
-import * as capture from '../capture'
-import * as ocr from '../ocr'
-import * as logger from '../logger'
-import * as core from '../core'
-import * as colorHelper from '../color'
+import TaskRunner from '../i'
+import * as capture from '../../capture'
+import * as ocr from '../../ocr'
+import * as logger from '../../logger'
+import * as core from '../../core'
+import * as colorHelper from '../../color'
 export default class CommitMission extends TaskRunner {
   getName(): string {
     return "提交任务"

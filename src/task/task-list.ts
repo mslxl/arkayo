@@ -1,11 +1,11 @@
-import TaskCustomBattle from './custom-battle'
-import TaskStartGame from './start-game'
-import TaskAll from './all-in-one'
-import TaskCommitMission from './commit-mission'
-import TaskHarvestBase from './harvest-base'
-import TaskRecruit from './recruit'
-import TaskPrepareBase from './prepare-base'
-import TaskOrundums from './orundums-farming'
+import TaskCustomBattle from './basic/custom-battle'
+import TaskStartGame from './basic/start-game'
+import TaskAll from './collection/all-in-one'
+import TaskCommitMission from './basic/commit-mission'
+import TaskHarvestBase from './basic/harvest-base'
+import TaskRecruit from './basic/recruit'
+import TaskPrepareBase from './basic/prepare-base'
+import TaskOrundums from './collection/orundums-farming'
 const tasks = [
   new TaskCustomBattle(),
   new TaskStartGame(),

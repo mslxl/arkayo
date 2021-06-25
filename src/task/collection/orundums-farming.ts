@@ -1,19 +1,19 @@
-import TaskRunner from './i'
+import TaskRunner from '../i'
 
-import StartGame from './start-game'
-import CommitMission from './commit-mission'
-import HarvestBase from './harvest-base'
-import EnterLongmen from './enter-longmen'
-import CustomBattle from './custom-battle'
-import AutoRecruit from './recruit'
-import Enter1T7 from './enter1-7'
-import PrepareBase from './prepare-base'
-import { refresh, setAutoCapture, shot } from '../capture'
+import StartGame from '../basic/start-game'
+import CommitMission from '../basic/commit-mission'
+import HarvestBase from '../basic/harvest-base'
+import EnterLongmen from '../internal/enter-longmen'
+import CustomBattle from '../basic/custom-battle'
+import AutoRecruit from '../basic/recruit'
+import Enter1T7 from '../internal/enter1-7'
+import PrepareBase from '../basic/prepare-base'
+import { refresh, setAutoCapture, shot } from '../../capture'
 
-import * as core from '../core'
-import * as logger from '../logger'
-import { detect, findAnyText, wrapResult } from '../ocr'
-import BackToMain from './back-to-main'
+import * as core from '../../core'
+import * as logger from '../../logger'
+import { detect, findAnyText, wrapResult } from '../../ocr'
+import BackToMain from '../internal/back-to-main'
 export default class OrundumsFarming extends TaskRunner {
   getName(): string {
     return "搓玉"

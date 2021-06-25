@@ -1,8 +1,8 @@
-import TaskRunner from './i'
-import * as capture from '../capture'
-import * as ocr from '../ocr'
-import * as logger from '../logger'
-import * as core from '../core'
+import TaskRunner from '../i'
+import * as capture from '../../capture'
+import * as ocr from '../../ocr'
+import * as logger from '../../logger'
+import * as core from '../../core'
 
 export default class StartGame extends TaskRunner {
   getName(): string {

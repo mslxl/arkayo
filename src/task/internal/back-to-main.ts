@@ -1,11 +1,11 @@
-import TaskRunner from './i'
+import TaskRunner from '../i'
 
 
-import * as capture from '../capture'
-import * as ocr from '../ocr'
-import * as core from '../core'
-import * as logger from '../logger'
-import * as colorHelper from '../color'
+import * as capture from '../../capture'
+import * as ocr from '../../ocr'
+import * as core from '../../core'
+import * as logger from '../../logger'
+import * as colorHelper from '../../color'
 export default class BackToMain extends TaskRunner {
     getName(): string {
         return "Internal[BackToMain]"

@@ -1,12 +1,12 @@
-import TaskRunner from './i'
-import * as capture from '../capture'
-import * as ocr from '../ocr'
-import * as core from '../core'
-import * as logger from '../logger'
-import * as colorHelper from '../color'
+import TaskRunner from '../i'
+import * as capture from '../../capture'
+import * as ocr from '../../ocr'
+import * as core from '../../core'
+import * as logger from '../../logger'
+import * as colorHelper from '../../color'
 import * as flow from 'debug-flow'
 
-import BackToMain from './back-to-main'
+import BackToMain from '../internal/back-to-main'
 
 export default class CustomBattle extends TaskRunner {
   getName(): string {

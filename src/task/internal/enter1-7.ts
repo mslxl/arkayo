@@ -1,9 +1,9 @@
-import TaskRunner from './i'
-import * as capture from '../capture'
-import * as ocr from '../ocr'
-import * as core from '../core'
-import Back from './back-to-main'
-import * as colorHelper from '../color'
+import TaskRunner from '../i'
+import * as capture from '../../capture'
+import * as ocr from '../../ocr'
+import * as core from '../../core'
+import Back from '../internal/back-to-main'
+import * as colorHelper from '../../color'
 
 export default class Enter1T7 extends TaskRunner {
     getName(): string {

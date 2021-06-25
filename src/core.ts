@@ -3,7 +3,7 @@ import * as conf from './config'
 import * as flow from 'debug-flow'
 
 
-import XML_UI from 'raw-loader!./float-dim-show.xml'
+import XML_UI from 'raw-loader!./res/float-dim-show.xml'
 export function clickXY(x: number, y: number) {
   logger.hideConsole()
   sleep(200)

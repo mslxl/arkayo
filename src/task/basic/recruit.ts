@@ -1,14 +1,14 @@
-import TaskRunner from './i'
-import * as capture from '../capture'
-import * as ocr from '../ocr'
-import * as core from '../core'
-import * as logger from '../logger'
-import * as colorHelper from '../color'
-import BackToMain from './back-to-main'
+import TaskRunner from '../i'
+import * as capture from '../../capture'
+import * as ocr from '../../ocr'
+import * as core from '../../core'
+import * as logger from '../../logger'
+import * as colorHelper from '../../color'
+import BackToMain from '../internal/back-to-main'
 import adjustTo9H from './recruit/opencv-adjustTo9H'
 
 import 'core-js/features/map'
-import { WrapResult } from '../ocr'
+import { WrapResult } from '../../ocr'
 
 export default class Recruit extends TaskRunner {
     getName(): string {

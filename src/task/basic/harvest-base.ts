@@ -1,10 +1,10 @@
-import TaskRunner from './i'
-import * as capture from '../capture'
-import * as ocr from '../ocr'
-import * as logger from '../logger'
-import * as core from '../core'
-import * as colorHelper from '../color'
-import BackToMain from './back-to-main'
+import TaskRunner from '../i'
+import * as capture from '../../capture'
+import * as ocr from '../../ocr'
+import * as logger from '../../logger'
+import * as core from '../../core'
+import * as colorHelper from '../../color'
+import BackToMain from '../internal/back-to-main'
 export default class HarvestBase extends TaskRunner {
   getName(): string {
     return "基建收菜"
