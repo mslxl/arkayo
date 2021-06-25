@@ -10,7 +10,7 @@ import BackToMain from './back-to-main'
 
 export default class CustomBattle extends TaskRunner {
   getName(): string {
-    return "Custom Battle"
+    return "自定义作战"
   }
   start(): void {
 

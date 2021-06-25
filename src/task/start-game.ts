@@ -6,7 +6,7 @@ import * as core from '../core'
 
 export default class StartGame extends TaskRunner {
   getName(): string {
-    return "Start Game"
+    return "启动游戏"
   }
   start(): void {
     core.wait(5)

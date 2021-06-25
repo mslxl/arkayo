@@ -7,7 +7,7 @@ import * as colorHelper from '../color'
 import BackToMain from './back-to-main'
 export default class HarvestBase extends TaskRunner {
   getName(): string {
-    return "Harvest Base"
+    return "基建收菜"
   }
   start(): void {
     if (!this.enterBase()) {

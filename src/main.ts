@@ -45,8 +45,8 @@ function initConsole(u: any) {
   u.console.setColor("D", "#000000")
   let menuItems: any[] = [];
   let menu = u.nav.menu;
-  menuItems.push(buildMenuItem(menu, 'Control', u.R.drawable.ic_build_black_48dp));
-  menuItems.push(buildMenuItem(menu, 'Console', u.R.drawable.ic_description_black_48dp));
+  menuItems.push(buildMenuItem(menu, '配置', u.R.drawable.ic_build_black_48dp));
+  menuItems.push(buildMenuItem(menu, '控制台', u.R.drawable.ic_description_black_48dp));
 
   u.nav.setOnNavigationItemSelectedListener(function (item: any) {
     u.pager.currentItem = menuItems.indexOf(item);

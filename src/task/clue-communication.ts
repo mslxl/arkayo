@@ -24,7 +24,7 @@ function clickText(text: string[]): boolean {
 
 export default class ClueCommunication extends TaskRunner {
     getName(): string {
-        return "Clue Communication"
+        return "线索交流"
     }
     start(): void {
         if (!clickText(['好友', '好反', '好仗', '合库', '合雕'])) {

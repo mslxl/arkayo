@@ -8,7 +8,7 @@ import BackToMain from './back-to-main'
 import HarvestBase from './harvest-base'
 export default class PrepareBase extends TaskRunner {
     getName(): string {
-        return "Feed Orundums Pieces Product"//"Prepare Base"
+        return "补充基建制造站的源石碎片"//"Prepare Base"
     }
     start(): void {
         capture.refresh()

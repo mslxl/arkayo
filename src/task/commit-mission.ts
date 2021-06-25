@@ -6,7 +6,7 @@ import * as core from '../core'
 import * as colorHelper from '../color'
 export default class CommitMission extends TaskRunner {
   getName(): string {
-    return "Commit Mission"
+    return "提交任务"
   }
   start(): void {
     capture.refresh()

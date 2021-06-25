@@ -16,7 +16,7 @@ import { detect, findAnyText, wrapResult } from '../ocr'
 import BackToMain from './back-to-main'
 export default class OrundumsFarming extends TaskRunner {
   getName(): string {
-    return "Orundums Farming"
+    return "搓玉"
   }
   start(): void {
     let tasks: TaskRunner[] = [

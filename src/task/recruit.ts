@@ -12,7 +12,7 @@ import { WrapResult } from '../ocr'
 
 export default class Recruit extends TaskRunner {
     getName(): string {
-        return "Auto Recruit"
+        return "自动公招（6月25日数据）"
     }
     start(): void {
         capture.refresh()

@@ -12,7 +12,7 @@ import * as core from '../core'
 import * as logger from '../logger'
 export default class AllInOne extends TaskRunner {
   getName(): string {
-    return "All in one"
+    return "多合一日常"
   }
   start(): void {
     let tasks: TaskRunner[] = [

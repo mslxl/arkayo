@@ -6,32 +6,32 @@
     <frame>
       <vertical padding="16">
         <horizontal>
-          <text text="Server:" />
+          <text text="游戏:" />
           <spinner layout_weight="1" id="spGame" entries="[[game]]" />
         </horizontal>
         <horizontal>
-          <text>Task:</text>
+          <text>任务:</text>
           <spinner layout_weight="1" id="spTask" entries="[[task]]" />
         </horizontal>
         <card>
           <vertical>
-            <text text="Click Mode:" />
+            <text text="点击模式:" />
             <radiogroup>
-              <radio id="raAcc" text="Accessibility (Recommend)" checked="true" />
+              <radio id="raAcc" text="无障碍 (Android 7+ 推荐)" checked="true" />
               <radio id="raRoot" text="Root" />
-              <radio id="raShell" text="Shell" />
+              <radio id="raShell" text="Shell(input)" />
             </radiogroup>
           </vertical>
         </card>
         <card>
           <vertical>
-            <text text="Other Config:" />
-            <checkbox id="cbConsole" text="Show console dialog" />
-            <checkbox id="cbKill" text="Kill game process after task is finished" />
-            <checkbox id="cbPoweroff" text="Shutdown after task is finished (Root needed)" />
+            <text text="其他:" />
+            <checkbox id="cbConsole" text="显示控制台弹窗" />
+            <checkbox id="cbKill" text="任务结束后退出游戏" />
+            <checkbox id="cbPoweroff" text="人物结束后关机 (需要 Root)" />
           </vertical>
         </card>
-        <button id="btnLaunch" text="Launch" />
+        <button id="btnLaunch" text="启动" />
       </vertical>
     </frame>
     <frame>
