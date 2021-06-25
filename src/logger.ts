@@ -1,14 +1,16 @@
+import * as stack from './stack'
+
 let isEnable = false;
 
 (console as any).setGlobalLogConfig({
-  file:'/sdcard/Download/arkayo.log'
+  file: '/sdcard/Download/arkayo.log'
 })
 
-export function setEnable(enable:boolean) {
+export function setEnable(enable: boolean) {
   isEnable = enable
-  if(enable){
+  if (enable) {
     showConsole()
-  }else{
+  } else {
     hideConsole()
   }
 }
@@ -19,34 +21,34 @@ export function showConsole() {
   }
 }
 
-export function hideConsole(wait:boolean = false) {
+export function hideConsole(wait: boolean = false) {
   console.hide()
-  if(wait){
+  if (wait) {
     sleep(800)
   }
 }
 
-export function log(str:any) {
+export function log(str: any, hideTask: boolean = false) {
   showConsole()
-  console.log(str)
+  console.log(`${hideTask ? "" : `[${stack.getLastName()}]: `}${str}`)
 }
 
-export function i(str:any){
+export function i(str: any, hideTask: boolean = false) {
   showConsole()
-  console.info(str)
+  console.info(`${hideTask ? "" : `[${stack.getLastName()}]: `}${str}`)
 }
 
-export function v(str:any){
+export function v(str: any, hideTask: boolean = false) {
   showConsole()
-  console.verbose(str)
+  console.verbose(`${hideTask ? "" : `[${stack.getLastName()}]: `}${str}`)
 }
 
-export function e(str:any){
+export function e(str: any, hideTask: boolean = false) {
   showConsole()
-  console.error(str)
+  console.error(`${hideTask ? "" : `[${stack.getLastName()}]: `}${str}`)
 }
 
-export function trace(str:any){
+export function trace(str: any, hideTask: boolean = false) {
   showConsole()
-  console.trace(str)
+  console.trace(`${hideTask ? "" : `[${stack.getLastName()}]: `}${str}`)
 }

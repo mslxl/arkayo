@@ -109,9 +109,7 @@ function initUI(u: any) {
         toastLog(`Launch ${game.name}`)
         launch(game.pkg)
         sleep(5000)
-        logger.i('[main]: Task start')
         task.start()
-        logger.i('[main]: Task finish')
       } finally {
         device.cancelKeepingAwake()
         if (conf.getV('kill-game', true)) {

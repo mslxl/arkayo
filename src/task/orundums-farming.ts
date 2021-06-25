@@ -29,12 +29,11 @@ export default class OrundumsFarming extends TaskRunner {
       new CommitMission(),
     ]
     tasks.forEach((task, index) => {
-      logger.i(`[Orundums Farming]: ${index + 1}/${tasks.length} - ${task.getName()}`)
+      logger.i(`进度 ${index + 1}/${tasks.length}`)
       task.start()
       setAutoCapture(false)
       core.wait(20)
     })
-    logger.i('[Orundums Farming]: All tasks were finished!')
   }
 }
 

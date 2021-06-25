@@ -34,7 +34,6 @@ export default class StartGame extends TaskRunner {
             recognized = true
             break
           } else if (item.t.indexOf('终端') != -1 || item.t.indexOf('采购中心') != -1 || item.t.indexOf('档案') != -1 || item.t.indexOf('好友') != -1 || item.t.indexOf('理智') != -1) {
-            logger.i('recognized Terminal, Task fin.')
             recognized = true
             return
           }

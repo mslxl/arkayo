@@ -25,12 +25,11 @@ export default class AllInOne extends TaskRunner {
       new CommitMission(),
     ]
     tasks.forEach((task, index) => {
-      logger.i(`[All-In-One]: ${index + 1}/${tasks.length} - ${task.getName()}`)
+      logger.i(`进度 ${index + 1}/${tasks.length}`)
       task.start()
       setAutoCapture(false)
       core.wait(20)
     })
-    logger.i('[All-In-One]: All tasks were finished!')
   }
 
 }

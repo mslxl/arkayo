@@ -86,7 +86,9 @@ export function opencvDetectPolyLocation(img, polyNum, mode = 0, minArea = 0) {
                 y: y
             })
         } else {
-            logger.v(`Detected ${curPolyNum} poly at (${x}, ${y})`)
+            debugFlow.debugBlock(()=>{
+                logger.v(`Detected ${curPolyNum} poly at (${x}, ${y})`)
+            })
         }
     }
     img.recycle()

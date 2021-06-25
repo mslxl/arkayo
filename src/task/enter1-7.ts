@@ -7,7 +7,7 @@ import * as colorHelper from '../color'
 
 export default class Enter1T7 extends TaskRunner {
     getName(): string {
-        return "Internal[EnterLast]"
+        return "Internal[Enter 1-7]"
     }
     start(): void {
 

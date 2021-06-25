@@ -28,7 +28,7 @@
             <text text="其他:" />
             <checkbox id="cbConsole" text="显示控制台弹窗" />
             <checkbox id="cbKill" text="任务结束后退出游戏" />
-            <checkbox id="cbPoweroff" text="人物结束后关机 (需要 Root)" />
+            <checkbox id="cbPoweroff" text="任务结束后关机 (需要 Root)" />
           </vertical>
         </card>
         <button id="btnLaunch" text="启动" />

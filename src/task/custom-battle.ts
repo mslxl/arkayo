@@ -18,62 +18,66 @@ export default class CustomBattle extends TaskRunner {
     let unrecognizedTimes = 0
     outter:
     while (true) {
-      let recognized = false
+      core.wait(10)
       capture.refresh()
       let texts = ocr.wrapResult(ocr.detect(capture.shot()))
-      for (const t of texts) {
-        if (t.t.indexOf('开始行动') != -1) {
-          logger.v('[CustomBattle] Prepare battle!')
-          core.clickRect(t)
-          recognized = true
-        } else if (t.t.indexOf('开始') != -1 || t.t.indexOf('行动') != -1) {
-          if (!this.checkAutoDeploy()) {
-            continue outter
-          }
-          logger.v('[CustomBattle] Battle start!')
-          core.clickRect(t)
-          recognized = true
-        } else if (t.t.indexOf('正在提交') != -1 || t.t.indexOf('反馈神经') != -1 || t.t.indexOf('Loading') != -1) {
-          logger.v('[CustomBattle] Wait...')
-          core.wait(5)
-          recognized = true
-        } else if (t.t.indexOf('接管作战') != -1 || t.t.indexOf('代理指挥作战正常') != -1) {
-          logger.i('[CustomBattle] War, war, never change')
-          core.wait(20)
-          recognized = true
-        } 
-        // else if(t.t.indexOf('3天')!= -1 || t.t.indexOf('2天')!= -1 || t.t.indexOf('1天') != -1){
-        // TODO 用临界药
-        // } 
-        else if (t.t.indexOf('使用至纯源石恢复') != -1 || t.t.indexOf('使用药剂恢复') != -1 || t.t.indexOf('是否花费以上') != -1) {
-          back()
-          this.back()
-          logger.v('[CustomBattle] Task fin')
-          return
-        } else if (t.t.indexOf('行动结束') != -1 || t.t.indexOf('全员信赖') != -1
-          || t.t.indexOf('常规掉落') != -1|| t.t.indexOf('剩余防御点') != -1
-          || t.t.indexOf('作战简报') != -1|| t.t.indexOf('速度耗时') != -1
-          || t.t.indexOf('龙门币奖励') != -1) {
-          logger.i('[CustomBattle] The battlefield is a place of tragedy. I hope they come to understand this one day.')
-          core.clickXY(random(1, device.height), random(1, device.width))
-          recognized = true
-        }
-        if (recognized) {
-          logger.v(`[CustomBattle] Recognized content:${JSON.stringify(t)}`)
-          core.wait(5)
-          break
-        }
+
+      let t = ocr.findText('开始行动', texts)
+      if (t) {
+        logger.v('Prepare battle!')
+        core.clickRect(t)
+        continue
       }
-      if (!recognized) {
-        unrecognizedTimes++
-        toastLog(`Unrecognized scene: ${unrecognizedTimes}/20, wait 20s`)
-        if (unrecognizedTimes > 20) {
-          throw new Error('Unrecognized scene')
+
+      t = ocr.findAnyText(['开始', '行动'], texts)
+      if (t) {
+        if (!this.checkAutoDeploy()) {
+          continue outter
         }
+        logger.v('Battle start!')
+        core.clickRect(t)
+        continue
+      }
+
+      t = ocr.findAnyText(['正在提交', '反馈神经', 'Loading'], texts)
+      if (t) {
+        logger.v('Wait...')
+        core.wait(5)
+        continue
+      }
+
+      t = ocr.findAnyText(['接管作战', '代理指挥作战正常'], texts)
+      if (t) {
+        logger.i('War, war, never change')
         core.wait(20)
-      } else {
-        unrecognizedTimes = 0
+        continue
       }
+
+      t = ocr.findAnyText(['使用至纯源石恢复', '使用药剂恢复', '是否花费以上'], texts)
+      if (t) {
+        back()
+        this.back()
+        return
+      }
+
+
+      t = ocr.findAnyText(['行动结束', '全员信赖', '常规掉落', '剩余防御点', '作战简报', '速度耗时', '龙门币奖励'], texts)
+      if (t) {
+        logger.i('The battlefield is a place of tragedy. I hope they come to understand this one day.')
+        core.clickXY(random(1, device.height), random(1, device.width))
+        continue
+      }
+
+
+
+      unrecognizedTimes++
+      toastLog(`Unrecognized scene: ${unrecognizedTimes}/20, wait 20s`)
+      if (unrecognizedTimes > 20) {
+        this.back()
+        return
+      }
+      core.wait(20)
+
     }
 
 
