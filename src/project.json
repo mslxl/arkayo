@@ -1,4 +1,5 @@
 {
+    "icon":"res/icon.png",
     "launchConfig": {
         "displaySplash": false,
         "hideLogs": false,
