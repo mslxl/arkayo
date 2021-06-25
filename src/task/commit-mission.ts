@@ -54,7 +54,7 @@ export default class CommitMission extends TaskRunner {
         retryTimes = 0
       } else {
         retryTimes++
-        logger.v('Did not find any new completed mission, retry...')
+        logger.v(`Did not find any new completed mission, retry... ${retryTimes}/5`)
         if (retryTimes > 5) {
           logger.v('It seems like all missions are completed.')
           back()

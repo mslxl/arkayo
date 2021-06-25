@@ -24,7 +24,7 @@ export default class StartGame extends TaskRunner {
         })
         let recognized = false
         for (const item of result) {
-          if (item.t.indexOf('源石') != -1 || item.t.indexOf('矿石') != -1 || item.t.indexOf('移动城市') != -1 || item.t.indexOf('感染者问题') != -1) {
+          if (item.t.indexOf('源石') != -1 || item.t.indexOf('矿石') != -1 || item.t.indexOf('移动城市') != -1 || item.t.indexOf('感染者问题') != -1 || item.t.indexOf('开始唤醒') != -1) {
             logger.v('recognized main UI')
             core.clickXY(item.x, item.y)
             recognized = true

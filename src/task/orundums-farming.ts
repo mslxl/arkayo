@@ -7,6 +7,7 @@ import EnterLongmen from './enter-longmen'
 import CustomBattle from './custom-battle'
 import AutoRecruit from './recruit'
 import Enter1T7 from './enter1-7'
+import PrepareBase from './prepare-base'
 import { refresh, setAutoCapture, shot } from '../capture'
 
 import * as core from '../core'
@@ -23,7 +24,7 @@ export default class OrundumsFarming extends TaskRunner {
       new HarvestBase(),
       new EnterBattle(),
       new CustomBattle(),
-      new HarvestBase(),
+      new PrepareBase(),
       // TODO new AutoRecruit(),
       new CommitMission(),
     ]
