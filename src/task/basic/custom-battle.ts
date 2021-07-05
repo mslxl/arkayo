@@ -31,9 +31,9 @@ export default class CustomBattle extends TaskRunner {
 
       t = ocr.findAnyText(['开始', '行动'], texts)
       if (t) {
-        if (!this.checkAutoDeploy()) {
-          continue outter
-        }
+        // if (!this.checkAutoDeploy()) {
+        //   continue outter
+        // }
         logger.v('Battle start!')
         core.clickRect(t)
         continue
