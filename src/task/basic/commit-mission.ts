@@ -8,6 +8,13 @@ export default class CommitMission extends TaskRunner {
   getName(): string {
     return "提交任务"
   }
+  getDesc(): string {
+    return [
+      "在主界面运行此任务。"
+    ].reduce((pre: string, acc: string) => `。${pre}\n${acc}`)
+  }
+
+
   start(): void {
     capture.refresh()
     // Detect mission clue

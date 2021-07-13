@@ -15,11 +15,10 @@ import * as logger from '../../logger'
 import { detect, findAnyText, wrapResult } from '../../ocr'
 import BackToMain from '../internal/back-to-main'
 export default class OrundumsFarming extends TaskRunner {
-  getName(): string {
-    return "搓玉"
-  }
-  start(): void {
-    let tasks: TaskRunner[] = [
+  tasks: TaskRunner[]
+  constructor() {
+    super()
+    this.tasks = [
       new StartGame(),
       new HarvestBase(),
       new EnterBattle(),
@@ -28,8 +27,21 @@ export default class OrundumsFarming extends TaskRunner {
       // TODO new AutoRecruit(),
       new CommitMission(),
     ]
-    tasks.forEach((task, index) => {
-      logger.i(`进度 ${index + 1}/${tasks.length}`)
+  }
+  getName(): string {
+    return "搓玉"
+  }
+  getDesc(): string {
+    return [
+      "在主界面或游戏未启动时运行此任务",
+      "该任务会依次执行下列任务：",
+    ].concat(this.tasks.map(v => v.getName()))
+      .reduce((pre: string, acc: string) => `${pre}\n${acc}`)
+  }
+  start(): void {
+
+    this.tasks.forEach((task, index) => {
+      logger.i(`进度 ${index + 1}/${this.tasks.length}`)
       task.start()
       setAutoCapture(false)
       core.wait(20)
@@ -37,21 +49,21 @@ export default class OrundumsFarming extends TaskRunner {
   }
 }
 
-class EnterBattle extends TaskRunner{
+class EnterBattle extends TaskRunner {
   start(): void {
     refresh()
-    let t = findAnyText(['终端','理智'],wrapResult(detect(shot())))
-    if(t){
+    let t = findAnyText(['终端', '理智'], wrapResult(detect(shot())))
+    if (t) {
       core.clickRect(t)
     }
     core.wait(5)
     refresh()
-    t = findAnyText(['每周报酬','理智'],wrapResult(detect(shot())))
+    t = findAnyText(['每周报酬', '理智'], wrapResult(detect(shot())))
     new BackToMain().start()
-    if(t){
+    if (t) {
       logger.i('Enter longmen...')
       new EnterLongmen().start()
-    }else{
+    } else {
       logger.i('Enter 1-7')
       new Enter1T7().start()
     }

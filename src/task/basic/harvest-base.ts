@@ -9,6 +9,12 @@ export default class HarvestBase extends TaskRunner {
   getName(): string {
     return "基建收菜"
   }
+  getDesc(): string {
+    return [
+        "在主界面运行此任务",
+        "该任务仅会在基建中收取制造站，交付订单，增进信赖，任务结束后返回主界面"
+    ].reduce((pre: string, acc: string) => `${pre}。\n${acc}`)
+}
   start(): void {
     if (!this.enterBase()) {
       return

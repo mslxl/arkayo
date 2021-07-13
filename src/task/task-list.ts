@@ -6,11 +6,13 @@ import TaskHarvestBase from './basic/harvest-base'
 import TaskRecruit from './basic/recruit'
 import TaskPrepareBase from './basic/prepare-base'
 import TaskOrundums from './collection/orundums-farming'
+import TaskClueCommunication from './basic/clue-communication'
 const tasks = [
   new TaskCustomBattle(),
   new TaskStartGame(),
   new TaskCommitMission(),
   new TaskHarvestBase(),
+  new TaskClueCommunication(),
   //new TaskRecruit(),
   new TaskPrepareBase(),
   new TaskAll(),

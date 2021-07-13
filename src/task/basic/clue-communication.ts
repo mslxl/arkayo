@@ -26,6 +26,12 @@ export default class ClueCommunication extends TaskRunner {
     getName(): string {
         return "线索交流"
     }
+    getDesc(): string {
+        return [
+            "在主界面运行此任务",
+            "该任务仅会拜访所有启动了线索交流的好友基建，任务结束后返回主界面"
+        ].reduce((pre: string, acc: string) => `${pre}。\n${acc}`)
+    }
     start(): void {
         if (!clickText(['好友', '好反', '好仗', '合库', '合雕'])) {
             return

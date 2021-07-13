@@ -12,6 +12,12 @@ export default class CustomBattle extends TaskRunner {
   getName(): string {
     return "自定义作战"
   }
+  getDesc(): string {
+    return [
+        "在作战开始界面（即存在“自动部署”选框的界面）运行此任务",
+        "该任务会不断刷图，直到理智耗尽，之后返回主界面"
+    ].reduce((pre: string, acc: string) => `${pre}。\n${acc}`)
+}
   start(): void {
 
     core.wait(5)

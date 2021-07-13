@@ -31,6 +31,9 @@
       </vertical>
     </card>
     <button id="btnLaunch" text="启动" />
+    <text id="textTaskDesc">
+
+    </text>
   </vertical>
 
 </vertical>

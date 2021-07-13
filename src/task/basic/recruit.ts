@@ -14,6 +14,14 @@ export default class Recruit extends TaskRunner {
     getName(): string {
         return "自动公招（6月25日数据）"
     }
+    getDesc(): string {
+        return [
+            "在主界面运行",
+            "该任务数据添加于 6 月 25 日。任务在发现 6 星 tag 时会停止运行，在发现能锁 5 星或 4 星时则会自动公招并满 9 小时",
+            "都不能锁则直接拉满 9 小时",
+            "注意：由于上游 Auto.js 的 Bug，该任物尚不能正常运行。详见：Issue #681"
+        ].reduce((pre: string, acc: string) => `${pre}。\n${acc}`)
+    }
     start(): void {
         capture.refresh()
         let t = ocr.findText('公开招募', ocr.wrapResult(ocr.detect(capture.shot())))

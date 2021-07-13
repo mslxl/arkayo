@@ -8,7 +8,7 @@ export default abstract class TaskRunner{
 
   }
   getDesc():string{
-    return this.getName()
+    return `${this.getName()}: 未添加任务描述`
   }
 
 

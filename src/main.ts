@@ -4,7 +4,6 @@ import * as logger from './logger'
 import * as capture from './capture'
 import * as conf from './config'
 import TaskExitGame from './task/internal/exit-game'
-let androidx = Packages.androidx;
 
 import taskList from './task/task-list'
 const data = {
@@ -30,12 +29,6 @@ function renderUI(u: any, uiXml: string, data: any) {
       }
     })
   u.layout(xml)
-}
-
-function buildMenuItem(menu: any, title: string, icon: any) {
-  let menuItem = menu.add(title)
-  menuItem.setIcon(icon)
-  return menuItem
 }
 
 function saveConfig(u: any) {
@@ -73,6 +66,14 @@ function initUI(u: any) {
   u.cbConsole.on('check', (checked: boolean) => {
     logger.setEnable(checked)
   })
+
+  u.spTask.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener({
+    onItemSelected: function (parent:any, view:any, i:number, id:any) {
+      u.textTaskDesc.setText(data.task[i].src.getDesc())
+    }
+  }))
+
+
 
   u.btnLaunch.on('click', () => {
     saveConfig(u)

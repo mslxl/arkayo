@@ -8,6 +8,12 @@ export default class StartGame extends TaskRunner {
   getName(): string {
     return "启动游戏"
   }
+  getDesc(): string {
+    return [
+        "在游戏未启动时运行",
+        "该任务仅会使游戏进入主界面，完成登录，签到，关闭公告等动作后任务结束"
+    ].reduce((pre: string, acc: string) => `${pre}。\n${acc}`)
+}
   start(): void {
     core.wait(5)
     while (true) {

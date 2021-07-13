@@ -10,6 +10,13 @@ export default class PrepareBase extends TaskRunner {
     getName(): string {
         return "补充基建制造站的源石碎片"//"Prepare Base"
     }
+    getDesc(): string {
+        return [
+            "在主界面运行此任务",
+            "补充制造计划（以固源岩合成源石碎片）",
+            "由于技术问题，寻找制造站时具有盲目性，所需时间较长，初次运行请注意该任物是否能在您的分辨率上正常运行"
+        ].reduce((pre: string, acc: string) => `${pre}。\n${acc}`)
+    }
     start(): void {
         capture.refresh()
         let meta = ocr.detectAndWrap(capture.shot())

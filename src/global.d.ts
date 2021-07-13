@@ -14,6 +14,7 @@ declare module "debug-flow" {
   export function run<T> (block:()=>T):T
 }
 
+declare const android:any
 declare const runtime: any
 declare const colors: any
 declare const ui: any

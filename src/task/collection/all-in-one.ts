@@ -11,11 +11,10 @@ import { setAutoCapture } from '../../capture'
 import * as core from '../../core'
 import * as logger from '../../logger'
 export default class AllInOne extends TaskRunner {
-  getName(): string {
-    return "多合一日常"
-  }
-  start(): void {
-    let tasks: TaskRunner[] = [
+  tasks: TaskRunner[]
+  constructor() {
+    super()
+    this.tasks = [
       new StartGame(),
       new HarvestBase(),
       new EnterLast(),
@@ -24,8 +23,22 @@ export default class AllInOne extends TaskRunner {
       new HarvestBase(),
       new CommitMission(),
     ]
-    tasks.forEach((task, index) => {
-      logger.i(`进度 ${index + 1}/${tasks.length}`)
+  }
+
+  getName(): string {
+    return "多合一日常"
+  }
+  getDesc(): string {
+    return [
+      "在主界面或游戏未启动时运行此任务",
+      "该任务会依次执行下列任务：",
+    ].concat(this.tasks.map(v=>v.getName()))
+    .reduce((pre: string, acc: string) => `${pre}\n${acc}`)
+  }
+  start(): void {
+
+    this.tasks.forEach((task, index) => {
+      logger.i(`进度 ${index + 1}/${this.tasks.length}`)
       task.start()
       setAutoCapture(false)
       core.wait(20)
