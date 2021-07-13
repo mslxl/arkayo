@@ -13,7 +13,7 @@ const tasks = [
   new TaskCommitMission(),
   new TaskHarvestBase(),
   new TaskClueCommunication(),
-  //new TaskRecruit(),
+  new TaskRecruit(),
   new TaskPrepareBase(),
   new TaskAll(),
   new TaskOrundums()

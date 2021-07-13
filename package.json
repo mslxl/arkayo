@@ -1,7 +1,7 @@
 {
   "name": "arkayo",
   "packageName": "com.tagigxo.arkayo",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack",

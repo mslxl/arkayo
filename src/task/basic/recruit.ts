@@ -12,7 +12,7 @@ import { WrapResult } from '../../ocr'
 
 export default class Recruit extends TaskRunner {
     getName(): string {
-        return "自动公招（6月25日数据）"
+        return "自动公招"
     }
     getDesc(): string {
         return [
@@ -151,7 +151,7 @@ export default class Recruit extends TaskRunner {
             }
         })
         )
-        logger.i(`TagMap: ${JSON.stringify(tagMap)}`)
+        logger.i(`可选 Tags: ${JSON.stringify(tagMap)}`)
 
         // 找一个满足条件的最高优先
         let statifyItem = null
@@ -169,7 +169,7 @@ export default class Recruit extends TaskRunner {
 
         // 按着这个招聘,没有直接拉满 9 小时
         if (statifyItem) {
-            logger.i(`StatifyItem: ${JSON.stringify(statifyItem)}`)
+            logger.i(`满足组合: ${JSON.stringify(statifyItem)}`)
             for (const tag of statifyItem) {
                 for (const e of elems) {
                     if (e.t.indexOf(tag.name) != -1) {
@@ -178,6 +178,8 @@ export default class Recruit extends TaskRunner {
                 }
             }
         }
+        
+        logger.i(`拉满`)
         adjustTo9H()
         return false
     }
