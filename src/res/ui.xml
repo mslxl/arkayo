@@ -2,41 +2,35 @@
   <appbar>
     <toolbar id="toolbar" title="Arkayo" />
   </appbar>
-  <viewpager id="pager" layout_weight="1">
-    <frame>
-      <vertical padding="16">
-        <horizontal>
-          <text text="游戏:" />
-          <spinner layout_weight="1" id="spGame" entries="[[game]]" />
-        </horizontal>
-        <horizontal>
-          <text>任务:</text>
-          <spinner layout_weight="1" id="spTask" entries="[[task]]" />
-        </horizontal>
-        <card>
-          <vertical>
-            <text text="点击模式:" />
-            <radiogroup>
-              <radio id="raAcc" text="无障碍 (Android 7+ 推荐)" checked="true" />
-              <radio id="raRoot" text="Root" />
-              <radio id="raShell" text="Shell(input)" />
-            </radiogroup>
-          </vertical>
-        </card>
-        <card>
-          <vertical>
-            <text text="其他:" />
-            <checkbox id="cbConsole" text="显示控制台弹窗" />
-            <checkbox id="cbKill" text="任务结束后退出游戏" />
-            <checkbox id="cbPoweroff" text="任务结束后关机 (需要 Root)" />
-          </vertical>
-        </card>
-        <button id="btnLaunch" text="启动" />
+
+  <vertical padding="16">
+    <horizontal>
+      <text text="游戏:" />
+      <spinner layout_weight="1" id="spGame" entries="[[game]]" />
+    </horizontal>
+    <horizontal>
+      <text>任务:</text>
+      <spinner layout_weight="1" id="spTask" entries="[[task]]" />
+    </horizontal>
+    <card>
+      <vertical>
+        <text text="点击模式:" />
+        <radiogroup>
+          <radio id="raAcc" text="无障碍 (Android 7+ 推荐)" checked="true" />
+          <radio id="raRoot" text="Root" />
+          <radio id="raShell" text="Shell(input)" />
+        </radiogroup>
       </vertical>
-    </frame>
-    <frame>
-      <console id="console" w="*" h="*"></console>
-    </frame>
-  </viewpager>
-  <bottomnaviagtion id="nav" bg="#ffffff" />
+    </card>
+    <card>
+      <vertical>
+        <text text="其他:" />
+        <checkbox id="cbConsole" text="显示控制台弹窗" />
+        <checkbox id="cbKill" text="任务结束后退出游戏" />
+        <checkbox id="cbPoweroff" text="任务结束后关机 (需要 Root)" />
+      </vertical>
+    </card>
+    <button id="btnLaunch" text="启动" />
+  </vertical>
+
 </vertical>

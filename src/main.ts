@@ -38,27 +38,6 @@ function buildMenuItem(menu: any, title: string, icon: any) {
   return menuItem
 }
 
-function initConsole(u: any) {
-  u.console.setConsole(runtime.console);
-  u.console.input.setTextColor(colors.BLACK);
-  u.console.setInputEnabled(false);
-  u.console.setColor("D", "#000000")
-  let menuItems: any[] = [];
-  let menu = u.nav.menu;
-  menuItems.push(buildMenuItem(menu, '配置', u.R.drawable.ic_build_black_48dp));
-  menuItems.push(buildMenuItem(menu, '控制台', u.R.drawable.ic_description_black_48dp));
-
-  u.nav.setOnNavigationItemSelectedListener(function (item: any) {
-    u.pager.currentItem = menuItems.indexOf(item);
-    return true;
-  });
-
-  ui.pager.addOnPageChangeListener(new androidx.viewpager.widget.ViewPager.OnPageChangeListener({
-    onPageSelected: function (position: number) {
-      menuItems[position].setChecked(true);
-    }
-  }));
-}
 function saveConfig(u: any) {
   conf.set('game', u.spGame.getSelectedItemPosition())
   conf.set('task', u.spTask.getSelectedItemPosition())
@@ -68,6 +47,7 @@ function saveConfig(u: any) {
   conf.set('poweroff', u.cbPoweroff.isChecked())
   conf.set('console', u.cbConsole.isChecked())
 }
+
 function readConfig(u: any) {
   conf.doIfGet('game', v => u.spGame.setSelection(v))
   conf.doIfGet('task', v => u.spTask.setSelection(v))
@@ -89,7 +69,6 @@ function initUI(u: any) {
     game: data.games.map((i: any) => i.name)
   })
 
-  initConsole(u)
   readConfig(u)
   u.cbConsole.on('check', (checked: boolean) => {
     logger.setEnable(checked)

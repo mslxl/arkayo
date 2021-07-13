@@ -13,15 +13,6 @@ const output_file = `${pkgCfg.name}.js`
 
 const prod = process.env.NODE_ENV === 'production'
 
-
-let autojsIgnore = fs.readFileSync(path.resolve(process.cwd(), 'src', '.autojs.build.ignore'))
-  .toString()
-  .split("\n")
-  .map(s => s.trim())
-  .filter(s => s != '')
-  .map(s => fs.realpathSync(path.resolve(process.cwd(), 'src', s)))
-  .concat([])
-
 const webpack = {
   entry: ['./src/main.ts'],
   output: {
@@ -64,16 +55,12 @@ const webpack = {
       patterns: [
         {
           from: './src/',
-          filter: async (path) => {
-            return autojsIgnore.indexOf(fs.realpathSync(path)) == -1
-          },
           globOptions: {
-            ignore: ['**/*.js', '**/*.ts']
+            ignore: ['**/*.js', '**/*.ts', '**/*.xml', '**/*.json']
           }
         }
       ],
     }, {
-      ignore: autojsIgnore,
       copyUnmodified: true
     }),
     new ProjectJson(),
