@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pref_screencapMode_entries">
+        <item>MediaProjection (Android 5.0+, Recommend)</item>
+        <item>Accessibility</item>
+        <item>Shizuku</item>
+        <item>Root</item>
+    </string-array>
+    <string-array name="pref_screencapMode_values">
+        <item>MediaProjection</item>
+        <item>Accessibility</item>
+        <item>Shizuku</item>
+        <item>Root</item>
+    </string-array>
+    <string name="pref_screencapMode_def">MediaProjection</string>
+
+    <string-array name="pref_clickMode_entries">
+        <item>Accessibility (Android7.0+, Recommend)</item>
+        <item>Shizuku</item>
+        <item>Root</item>
+    </string-array>
+    <string-array name="pref_clickMode_values">
+        <item>Accessibility</item>
+        <item>Shizuku</item>
+        <item>Root</item>
+    </string-array>
+    <string name="pref_clickMode_def">Accessibility</string>
+
+
+    <string-array name="pref_ocrSrc_entries">
+        <item>Tesseract</item>
+        <item>Baidu OCR (require Network)</item>
+    </string-array>
+    <string-array name="pref_ocrSrc_values">
+        <item>Tesseract</item>
+        <item>Baidu</item>
+    </string-array>
+    <string name="pref_ocrSrc_def">Tesseract</string>
+
+
+    <string-array name="pref_gameVersion_entries">
+        <item>Arknights - HG</item>
+        <item>Arknights - Bilibili</item>
+    </string-array>
+    <string-array name="pref_gameVersion_values">
+        <item>HyperGryph</item>
+        <item>Bilibili</item>
+    </string-array>
+    <string name="pref_gameVersion_def">HyperGryph</string>
+
+    <string-array name="pref_afterSinTask_entries">
+        <item>Exit Game</item>
+        <item>Close Screen</item>
+        <item>Power Off Phone</item>
+    </string-array>
+    <string-array name="pref_afterSinTask_values">
+        <item>Exit</item>
+        <item>CloseScreen</item>
+        <item>Poweroff</item>
+    </string-array>
+    <string name="pref_afterSinTask_def">Exit</string>
+</resources>

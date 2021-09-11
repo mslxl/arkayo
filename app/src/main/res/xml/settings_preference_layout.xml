@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <PreferenceCategory android:title="@string/prefCat_permission">
+        <ListPreference
+            android:key="pref_screencapMode"
+            android:title="@string/prefTitle_screencapMode"
+            android:persistent="true"
+            android:defaultValue="@string/pref_screencapMode_def"
+            android:entries="@array/pref_screencapMode_entries"
+            android:entryValues="@array/pref_screencapMode_values" />
+        <ListPreference
+            android:key="pref_clickMode"
+            android:title="@string/prefTitle_clickMode"
+            android:persistent="true"
+            android:defaultValue="@string/pref_clickMode_def"
+            android:entries="@array/pref_clickMode_entries"
+            android:entryValues="@array/pref_clickMode_values" />
+        <ListPreference
+            android:key="pref_ocrSrc"
+            android:title="@string/prefTitle_ocrSrc"
+            android:persistent="true"
+            android:defaultValue="@string/pref_ocrSrc_def"
+            android:entries="@array/pref_ocrSrc_entries"
+            android:entryValues="@array/pref_ocrSrc_values" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/prefCat_game">
+        <ListPreference
+            android:key="pref_gameVersion"
+            android:title="@string/prefTitle_gameVersion"
+            android:persistent="true"
+            android:defaultValue="@string/pref_gameVersion_def"
+            android:entries="@array/pref_gameVersion_entries"
+            android:entryValues="@array/pref_gameVersion_values" />
+
+        <ListPreference
+            android:key="pref_afterSinTask"
+            android:title="@string/prefTitle_afterSinTask"
+            android:persistent="true"
+            android:defaultValue="@string/pref_afterSinTask_def"
+            android:entries="@array/pref_afterSinTask_entries"
+            android:entryValues="@array/pref_afterSinTask_values" />
+    </PreferenceCategory>
+</PreferenceScreen>
