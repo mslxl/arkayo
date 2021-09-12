@@ -28,7 +28,7 @@
 
 
     <string-array name="pref_ocrSrc_entries">
-        <item>Tesseract</item>
+        <item>Tesseract (based on tessdata_best model)</item>
         <item>Baidu OCR (require Network)</item>
     </string-array>
     <string-array name="pref_ocrSrc_values">

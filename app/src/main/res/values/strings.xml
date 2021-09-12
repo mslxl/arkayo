@@ -10,4 +10,7 @@
     <string name="prefCat_game">Game</string>
     <string name="prefTitle_gameVersion">Game Server</string>
     <string name="prefTitle_afterSinTask">Action after single task was finished</string>
+    <string name="btn_start">start</string>
+    <string name="fab_start">Start</string>
+    <string name="fab_addsubtask">Add subtask</string>
 </resources>
