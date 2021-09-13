@@ -13,4 +13,7 @@
     <string name="btn_start">start</string>
     <string name="fab_start">Start</string>
     <string name="fab_addsubtask">Add subtask</string>
+
+    <string name="notify_fg_media_title">Arkayo is take care your screen</string>
+    <string name="notify_fg_media_desc">Tap to open Arkayo</string>
 </resources>

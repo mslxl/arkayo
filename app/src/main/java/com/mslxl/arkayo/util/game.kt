@@ -1,6 +1,7 @@
 package com.mslxl.arkayo.util
 
 import android.content.Context
+import android.graphics.Bitmap
 import androidx.preference.PreferenceManager
 
 fun <T> Context.withGameServer(
@@ -14,4 +15,13 @@ fun <T> Context.withGameServer(
         else -> null
     } ?: throw Exception()
     return ret
+}
+
+fun <T> Bitmap.use(block: (bitmap: Bitmap) -> T): T {
+    block.invoke(this).let {
+        if (!isRecycled) {
+            recycle()
+        }
+        return it
+    }
 }
