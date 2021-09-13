@@ -1,4 +1,6 @@
 # Akayo
+*原使用 Auto.js 开发的 Akayo 已停止维护，新脚本正在使用 Kotlin 在 [dev分支](https://github.com/mslxl/arkayo/tree/dev) 慢速开发中*
+
 Arknights 启动，作战，收菜，搓玉一脚本解决，适用于没有时间的学生~~放弃游戏~~
 
 ## 功能
