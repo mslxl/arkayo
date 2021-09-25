@@ -17,6 +17,15 @@ fun <T> Context.withGameServer(
     return ret
 }
 
+fun <T, A> Context.withGameServer(hg: A?, bili: A?, block: (A) -> T): T = withGameServer(
+    hg = {
+        hg?.let(block)
+    },
+    bili = {
+        bili?.let(block)
+    }) ?: throw Exception()
+
+
 fun <T> Bitmap.use(block: (bitmap: Bitmap) -> T): T {
     block.invoke(this).let {
         if (!isRecycled) {
