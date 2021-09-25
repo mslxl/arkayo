@@ -1,6 +1,7 @@
 package com.mslxl.arkayo.ui.dashboard
 
 import android.animation.Animator
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.mslxl.arkayo.R
 import com.mslxl.arkayo.databinding.FragmentDashboardBinding
+import com.mslxl.arkayo.ui.activity.TaskListActivity
 
 class DashboardFragment : Fragment() {
 
@@ -36,6 +38,12 @@ class DashboardFragment : Fragment() {
                 closeFABMenu()
             else
                 showFABMenu()
+        }
+        binding.fabAdd.setOnClickListener {
+            val activity = this.requireActivity()
+            val intent = Intent(activity, TaskListActivity::class.java)
+            activity.startActivity(intent)
+
         }
 
 //        val textView: TextView = binding.textDashboard

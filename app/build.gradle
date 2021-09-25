@@ -51,6 +51,9 @@ dependencies {
 
 //    implementation 'pub.devrel:easypermissions:3.0.0'
     implementation 'cz.adaptech:tesseract4android:3.0.0'
+//    implementation 'com.quickbirdstudios:opencv:4.5.3'
+    implementation 'com.quickbirdstudios:opencv-contrib:4.5.3'
+
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
