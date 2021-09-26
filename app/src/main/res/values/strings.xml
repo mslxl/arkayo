@@ -3,6 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_settings">Settings</string>
+    <string name="title_error">Error</string>
     <string name="prefCat_permission">Permission</string>
     <string name="prefTitle_screencapMode">Screencap Mode</string>
     <string name="prefTitle_clickMode">Click Mode</string>

@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
 import com.mslxl.arkayo.R
 import com.mslxl.arkayo.databinding.ActivityTaskDetailBinding
 import com.mslxl.arkayo.task.TaskManager
@@ -37,8 +36,10 @@ class TaskDetailActivity : AppCompatActivity() {
         binding.textfieldDetail.text = getString(TaskManager.getTaskBuilderByID(taskID)!!.descID)
 
         binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            TaskManager.startTask(
+                this,
+                TaskManager.getTaskBuilderByID(R.string.task_name_startGame)!!.build()
+            )
         }
     }
 }
