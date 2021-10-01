@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
 import android.os.Looper
+import android.widget.Toast
 import com.mslxl.arkayo.task.ITask
 import com.mslxl.arkayo.util.logger.Logger
 import kotlinx.coroutines.runBlocking
@@ -34,6 +35,7 @@ class TaskService : Service() {
                     task.start(this@TaskService.baseContext)
                 } catch (e: Exception) {
                     Logger.e("TaskService", null, e);
+                    Toast.makeText(baseContext, e.toString(), Toast.LENGTH_LONG).show()
                 }
             }
         }

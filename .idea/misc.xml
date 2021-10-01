@@ -18,8 +18,10 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.4569746376811594" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.4569746376811594" />
         <entry key="app/src/main/res/layout/fragment_setttings.xml" value="0.33541666666666664" />
-        <entry key="app/src/main/res/layout/item_task_preview.xml" value="0.8800000000000001" />
+        <entry key="app/src/main/res/layout/item_task_builder_item.xml" value="0.35" />
+        <entry key="app/src/main/res/layout/item_task_preview.xml" value="0.8" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.5658362989323843" />
+        <entry key="app/src/main/res/menu/menu_task_detail.xml" value="0.4578125" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.6036458333333333" />
         <entry key="app/src/main/res/xml/settings_preference_layout.xml" value="0.4057971014492754" />
       </map>

@@ -15,6 +15,7 @@ class TaskStartGame : ITask {
         override val nameID: Int = R.string.task_name_startGame
         override val descID: Int = R.string.task_desc_startGame
         override fun build() = TaskStartGame()
+        override fun newInstance() = this
     }
 
     override val taskID: Int = R.string.task_name_startGame

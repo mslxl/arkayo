@@ -1,4 +1,4 @@
-package com.mslxl.arkayo.ui.settings
+package com.mslxl.arkayo.ui.activity.main.settings
 
 import android.os.Bundle
 import androidx.preference.ListPreference

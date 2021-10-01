@@ -14,13 +14,14 @@ object Logger {
     fun i(tag: String, msg: String) {
         Log.i(tag, msg)
     }
-}
 
-inline fun <T> withLogger(tag: String, block: LoggerTag.() -> T): T {
-    LoggerTag(tag).apply {
-        return block.invoke(this)
+    inline fun <T> withLogger(tag: String, block: LoggerTag.() -> T): T {
+        LoggerTag(tag).apply {
+            return block.invoke(this)
+        }
     }
 }
+
 
 @JvmInline
 value class LoggerTag(val tag: String) {

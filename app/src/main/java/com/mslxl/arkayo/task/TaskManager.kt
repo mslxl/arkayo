@@ -18,12 +18,13 @@ object TaskManager {
     init {
         // Register all tasks below
         TaskStartGame.Builder.reg()
+//        TaskSeq.Builder().reg()
 
     }
 
     val tasks get() = taskList.values.toList()
     val size get() = tasks.size
-    fun getTaskBuilderByID(id: Int) = taskList[id]
+    fun getTaskBuilderByID(id: Int) = taskList[id]!!.newInstance()
     fun startTask(ctx: Context, task: ITask) {
         val connection = object : ServiceConnection {
             override fun onServiceConnected(p0: ComponentName?, binder: IBinder) {
@@ -40,4 +41,5 @@ object TaskManager {
         ctx.startService(intent)
         ctx.bindService(intent, connection, Context.BIND_AUTO_CREATE)
     }
+
 }

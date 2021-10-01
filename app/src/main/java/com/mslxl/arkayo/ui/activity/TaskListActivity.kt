@@ -1,5 +1,7 @@
 package com.mslxl.arkayo.ui.activity
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,13 +9,19 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mslxl.arkayo.R
 import com.mslxl.arkayo.databinding.ActivityTaskListBinding
 import com.mslxl.arkayo.task.TaskManager
 
+
 class TaskListActivity : AppCompatActivity() {
+    companion object {
+        const val RESULT_TAG = "add_task"
+    }
+
     private lateinit var binding: ActivityTaskListBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +31,8 @@ class TaskListActivity : AppCompatActivity() {
         val recycler = binding.recyclerTask
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = Adapter()
+        val dividerItemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        recycler.addItemDecoration(dividerItemDecoration)
     }
 
     inner class Adapter : RecyclerView.Adapter<ViewHolder>() {
@@ -48,6 +58,13 @@ class TaskListActivity : AppCompatActivity() {
         init {
             detailBtn.setOnClickListener {
                 TaskDetailActivity.showTask(id, this@TaskListActivity)
+            }
+            addBtn.setOnClickListener {
+                val intent = Intent().apply {
+                    putExtra(RESULT_TAG, id)
+                }
+                setResult(Activity.RESULT_OK, intent)
+                finish()
             }
         }
 

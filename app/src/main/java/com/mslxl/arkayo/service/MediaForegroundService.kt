@@ -6,8 +6,8 @@ import android.content.Intent
 import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
-import com.mslxl.arkayo.MainActivity
 import com.mslxl.arkayo.R
+import com.mslxl.arkayo.ui.activity.main.MainActivity
 
 class MediaForegroundService : Service() {
     override fun onBind(p0: Intent?): IBinder? = null

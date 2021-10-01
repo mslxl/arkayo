@@ -1,15 +1,23 @@
-package com.mslxl.arkayo.ui.dashboard
+package com.mslxl.arkayo.ui.activity.main.dashboard
 
 import android.animation.Animator
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.mslxl.arkayo.R
 import com.mslxl.arkayo.databinding.FragmentDashboardBinding
+import com.mslxl.arkayo.task.TaskManager
+import com.mslxl.arkayo.task.basic.TaskSeq
 import com.mslxl.arkayo.ui.activity.TaskListActivity
 
 class DashboardFragment : Fragment() {
@@ -21,6 +29,22 @@ class DashboardFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
     private var isShowFAB = false
+
+
+    private val taskListLauncher: ActivityResultLauncher<Intent> =
+        this.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == Activity.RESULT_OK) {
+                dashboardViewModel.taskQueue.add(
+                    TaskManager.getTaskBuilderByID(
+                        it.data!!.getIntExtra(
+                            TaskListActivity.RESULT_TAG,
+                            0
+                        )
+                    )
+                )
+                _binding?.recyclerTask?.adapter?.notifyDataSetChanged()
+            }
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,15 +65,24 @@ class DashboardFragment : Fragment() {
         }
         binding.fabAdd.setOnClickListener {
             val activity = this.requireActivity()
-            val intent = Intent(activity, TaskListActivity::class.java)
-            activity.startActivity(intent)
-
+            taskListLauncher.launch(Intent(activity, TaskListActivity::class.java))
+        }
+        binding.fabStart.setOnClickListener {
+            val seq = TaskSeq.Builder().apply {
+                this.list = dashboardViewModel.taskQueue.map { it.build() }
+            }.build()
+            TaskManager.startTask(this.requireContext(), seq)
         }
 
+
+        val recycler = binding.recyclerTask
+        recycler.layoutManager = LinearLayoutManager(this.requireContext())
+        recycler.adapter = Adapter()
 //        val textView: TextView = binding.textDashboard
 //        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
 //            textView.text = it
 //        })
+
         return root
     }
 
@@ -80,6 +113,7 @@ class DashboardFragment : Fragment() {
 
     }
 
+
     private fun showFABMenu() {
         isShowFAB = true
         with(binding) {
@@ -96,5 +130,26 @@ class DashboardFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    inner class Adapter : RecyclerView.Adapter<ViewHolder>() {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+            val itemView = LayoutInflater.from(this@DashboardFragment.requireContext())
+                .inflate(R.layout.item_task_builder_item, parent, false)
+            return ViewHolder(itemView)
+        }
+
+        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+            val item = dashboardViewModel.taskQueue[position]
+            holder.textView.text = this@DashboardFragment.requireContext().getString(item.nameID)
+        }
+
+        override fun getItemCount(): Int = dashboardViewModel.taskQueue.size
+
+    }
+
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val textView = itemView.findViewById<TextView>(R.id.textView)
+
     }
 }
