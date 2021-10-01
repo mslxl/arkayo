@@ -12,6 +12,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mslxl.arkayo.R
@@ -78,6 +79,10 @@ class DashboardFragment : Fragment() {
         val recycler = binding.recyclerTask
         recycler.layoutManager = LinearLayoutManager(this.requireContext())
         recycler.adapter = Adapter()
+
+        val dividerItemDecoration =
+            DividerItemDecoration(this.requireContext(), DividerItemDecoration.VERTICAL)
+        recycler.addItemDecoration(dividerItemDecoration)
 //        val textView: TextView = binding.textDashboard
 //        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
 //            textView.text = it
