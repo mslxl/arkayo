@@ -7,7 +7,10 @@ import android.os.IBinder
 import android.os.Looper
 import android.widget.Toast
 import com.mslxl.arkayo.task.ITask
+import com.mslxl.arkayo.util.auto.Automator
 import com.mslxl.arkayo.util.logger.Logger
+import com.mslxl.arkayo.util.ocr.OCREngine
+import com.mslxl.arkayo.util.screencap.ScreenCapture
 import kotlinx.coroutines.runBlocking
 import kotlin.concurrent.thread
 
@@ -28,10 +31,14 @@ class TaskService : Service() {
 
 
     fun start() {
+        Automator.autoConfig(baseContext)
+        ScreenCapture.autoConfig(baseContext)
+        OCREngine.autoConfig(baseContext)
         thread {
             Looper.prepare()
             runBlocking {
                 try {
+                    ScreenCapture.requestPermission(baseContext)
                     task.start(this@TaskService.baseContext)
                 } catch (e: Exception) {
                     Logger.e("TaskService", null, e);

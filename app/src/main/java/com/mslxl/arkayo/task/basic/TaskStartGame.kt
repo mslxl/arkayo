@@ -5,6 +5,10 @@ import android.content.Intent
 import com.mslxl.arkayo.R
 import com.mslxl.arkayo.task.ITask
 import com.mslxl.arkayo.task.ITaskBuilder
+import com.mslxl.arkayo.util.ocr.OCREngine
+import com.mslxl.arkayo.util.ocr.containsAnyText
+import com.mslxl.arkayo.util.ocr.filterByText
+import com.mslxl.arkayo.util.screencap.ScreenCapture
 import com.mslxl.arkayo.util.withGameServer
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
@@ -21,7 +25,7 @@ class TaskStartGame : ITask {
     override val taskID: Int = R.string.task_name_startGame
     override val builder = Builder
 
-    override suspend fun start(ctx: Context) = suspendCoroutine<Unit> { continuation ->
+    override suspend fun start(ctx: Context) {
         val pkgMan = ctx.packageManager
         ctx.withGameServer(
             bili = "com.hypergryph.arknights.bilibili",
@@ -32,9 +36,19 @@ class TaskStartGame : ITask {
             }
             if (intent != null) {
                 ctx.startActivity(intent)
-                continuation.resume(Unit)
             } else {
-                continuation.resumeWithException(Exception("No package"))
+                throw Exception("No package")
+            }
+        }
+        OCREngine.autoConfig(ctx)
+        while (true) {
+            val bitmap = ScreenCapture.capture()
+            val ocrResult = OCREngine.detect(bitmap)
+            println(ocrResult)
+            if (ocrResult.containsAnyText(listOf("正在加载网络配置"))) {
+                throw Exception("Client is out-of-date")
+            } else if (ocrResult.containsAnyText(listOf("本游戏的时间"))) {
+                continue
             }
         }
     }
